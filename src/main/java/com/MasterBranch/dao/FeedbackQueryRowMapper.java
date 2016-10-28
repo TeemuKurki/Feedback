@@ -12,7 +12,10 @@ public class FeedbackQueryRowMapper implements RowMapper<Query> {
 	@Override
 	public Query mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Query q = new Query();
-		return null;
+		q.setId(rs.getInt("id"));
+		q.setAnswer(rs.getString("answer"));
+		q.setQuery(rs.getString("query"));
+		return q;
 	}
 
 }
