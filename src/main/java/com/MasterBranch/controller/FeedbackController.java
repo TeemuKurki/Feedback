@@ -25,8 +25,8 @@ public class FeedbackController {
 	}
 	
 	@RequestMapping("/inquiries")
-	public @ResponseBody List<Enquiry> getAllEnqueries() {
-		List<Enquiry> enqueries = dao.getAllEnqueries();
-		return enqueries;
+	public @ResponseBody List<Enquiry> getAllEnquiries() {
+		List<Enquiry> enquiries = dao.getAllEnquiries();
+		return enquiries;
 	}
 }
