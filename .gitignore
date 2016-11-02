@@ -1,3 +1,5 @@
+.DS_Store
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -22,3 +24,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+### DATABASE ###
+db_connection.properties
