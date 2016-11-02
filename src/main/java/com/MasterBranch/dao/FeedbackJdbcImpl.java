@@ -6,6 +6,7 @@ import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.MasterBranch.bean.Inquiry;
 import com.MasterBranch.bean.Query;
 /**
  * 
@@ -33,9 +34,15 @@ public class FeedbackJdbcImpl {
 		try {
 			queries = jdbcTemplate.query(sql, parameter, queryMapper);
 		}catch(IncorrectResultSizeDataAccessException e){
+			//Placeholder. Adding better error handling later
 			System.out.println("Cannot find data from database");
 		}
 		return queries;
 	}
-	
+	public List<Inquiry> getAllInquires(){
+		String sql = "SELECT * FROM inquires";
+		RowMapper<Inquiry> inquiryMapper = new FeedbackInquiryRowMapper();
+		List<Inquiry> inquires = jdbcTemplate.query(sql, inquiryMapper);
+		return inquires;
+	}
 }
