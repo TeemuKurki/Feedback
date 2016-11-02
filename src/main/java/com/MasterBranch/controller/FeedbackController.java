@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.MasterBranch.bean.Inquiry;
+import com.MasterBranch.bean.Enquiry;
 import com.MasterBranch.bean.Query;
 import com.MasterBranch.dao.FeedbackJdbcImpl;
 
@@ -25,8 +25,8 @@ public class FeedbackController {
 	}
 	
 	@RequestMapping("/inquiries")
-	public @ResponseBody List<Inquiry> getAllInquiries() {
-		List<Inquiry> inquiries = dao.getAllInquiries();
-		return inquiries;
+	public @ResponseBody List<Enquiry> getAllEnqueries() {
+		List<Enquiry> enqueries = dao.getAllEnqueries();
+		return enqueries;
 	}
 }

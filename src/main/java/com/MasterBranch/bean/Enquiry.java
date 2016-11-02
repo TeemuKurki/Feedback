@@ -2,20 +2,20 @@ package com.MasterBranch.bean;
 
 import java.util.List;
 
-public class Inquiry {
+public class Enquiry {
 	private int id;
 	private String name;
 	private boolean isDeployed;
 	private List<Query> queries;
 	
-	public Inquiry() {
+	public Enquiry() {
 		super();
 		this.id = 0;
 		this.name = "";
 		this.isDeployed = false;
 	}
 	
-	public Inquiry(int id, String name) {
+	public Enquiry(int id, String name) {
 		this.id = id;
 		this.name = name;
 		this.isDeployed = false;
