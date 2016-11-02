@@ -1,0 +1,30 @@
+CREATE TABLE Enquiries (
+	id INT (10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	description VARCHAR (255)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE Query (
+	id INT (10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	question VARCHAR (255) NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE Answer (
+	id INT (10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	answer VARCHAR (255) NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE Queries (
+	enquery_id INT (10) NOT NULL,
+	query_id INT (10) NOT NULL,
+	PRIMARY KEY (enquery_id, query_id),
+	FOREIGN KEY (enquery_id) REFERENCES Enquiries (id),
+	FOREIGN KEY (query_id) REFERENCES Query (id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE Answers (
+	query_id INT (10) NOT NULL,
+	answer_id INT (10) NOT NULL,
+	PRIMARY KEY (query_id, answer_id),
+	FOREIGN KEY (query_id) REFERENCES Query (id),
+	FOREIGN KEY (answer_id) REFERENCES Answer (id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
