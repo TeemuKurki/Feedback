@@ -26,9 +26,9 @@ public class FeedbackJdbcImpl {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	public List<Query> getAllQueries(int inqueryId){
-		String sql = "SELECT queries FROM enquires WHERE id = ?";
-		Object[] parameter = new Object[] { inqueryId };
+	public List<Query> getAllQueries(int enquiryId){
+		String sql = "SELECT Queries FROM Enquiries WHERE id = ?";
+		Object[] parameter = new Object[] { enquiryId };
 		RowMapper<Query> queryMapper = new FeedbackQueryRowMapper();
 		List<Query> queries = null;
 		try {
@@ -40,9 +40,9 @@ public class FeedbackJdbcImpl {
 		return queries;
 	}
 	public List<Enquiry> getAllEnquiries(){
-		String sql = "SELECT * FROM enquires";
+		String sql = "SELECT * FROM Enquiries";
 		RowMapper<Enquiry> enquiryMapper = new FeedbackEnquiryRowMapper();
-		List<Enquiry> inquires = jdbcTemplate.query(sql, enquiryMapper);
-		return inquires;
+		List<Enquiry> enquiries = jdbcTemplate.query(sql, enquiryMapper);
+		return enquiries;
 	}
 }
