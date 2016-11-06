@@ -2,20 +2,18 @@ package com.MasterBranch.dao;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import com.MasterBranch.bean.Enquiry;
 import com.MasterBranch.bean.Query;
-/**
- * 
- * 
- *
- */
-
-public class FeedbackJdbcImpl {
-
+@Repository
+public class FeedbackJdbcImpl implements FeedbackDAO {
+	@Inject
 	private JdbcTemplate jdbcTemplate;
 	
 	public JdbcTemplate getJdbcTemplate() {
@@ -27,6 +25,7 @@ public class FeedbackJdbcImpl {
 	}
 	
 	public List<Query> getAllQueries(int enquiryId){
+		//Pitäisi hakea kaikki kysymykset tietyltä kyselyltä
 		String sql = "SELECT Queries FROM Enquiries WHERE id = ?";
 		Object[] parameter = new Object[] { enquiryId };
 		RowMapper<Query> queryMapper = new FeedbackQueryRowMapper();

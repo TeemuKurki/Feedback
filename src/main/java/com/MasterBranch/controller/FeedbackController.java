@@ -11,12 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.MasterBranch.bean.Enquiry;
 import com.MasterBranch.bean.Query;
-import com.MasterBranch.dao.FeedbackJdbcImpl;
-
+import com.MasterBranch.dao.FeedbackDAO;
 @Controller
 public class FeedbackController {
 	@Inject
-	FeedbackJdbcImpl dao;
+	FeedbackDAO dao;
 	
 	@RequestMapping("/{id}/**")
 	public @ResponseBody List<Query> getAllQueries(@PathVariable Integer id) {
@@ -24,9 +23,10 @@ public class FeedbackController {
 		return queries;
 	}
 	
-	@RequestMapping("/inquiries")
+	@RequestMapping("/enquiries")
 	public @ResponseBody List<Enquiry> getAllEnquiries() {
 		List<Enquiry> enquiries = dao.getAllEnquiries();
 		return enquiries;
 	}
+	
 }

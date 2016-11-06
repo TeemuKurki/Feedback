@@ -9,12 +9,10 @@ import com.MasterBranch.bean.Enquiry;
 
 public class FeedbackEnquiryRowMapper implements RowMapper<Enquiry> {
 // Does not get queries
-	@Override
 	public Enquiry mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Enquiry iq = new Enquiry();
-		iq.setDeployed(rs.getBoolean("isDeployed"));
 		iq.setId(rs.getInt("id"));
-		iq.setName(rs.getString("name"));
+		iq.setName(rs.getString("description"));
 		return iq;
 	}
 
