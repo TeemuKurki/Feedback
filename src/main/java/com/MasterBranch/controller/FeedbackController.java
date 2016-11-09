@@ -17,7 +17,7 @@ public class FeedbackController {
 	@Inject
 	FeedbackDAO dao;
 	
-	@RequestMapping("/{id}/**")
+	@RequestMapping("/{id}")
 	public @ResponseBody List<Query> getAllQueries(@PathVariable Integer id) {
 		List<Query> queries = dao.getAllQueries(id);
 		return queries;

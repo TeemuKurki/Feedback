@@ -1,6 +1,8 @@
 package com.MasterBranch.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -24,15 +26,22 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	public List<Query> getAllQueries(int enquiryId){
-		//Pitäisi hakea kaikki kysymykset tietyltä kyselyltä
-		String sql = "SELECT Queries FROM Enquiries WHERE id = ?";
-		Object[] parameter = new Object[] { enquiryId };
-		RowMapper<Query> queryMapper = new FeedbackQueryRowMapper();
-		List<Query> queries = null;
+	public List<Query> getAllQueries(int id){
+
+		String sql = "SELECT Query.id, question FROM Query INNER JOIN Queries ON Query.id = Queries.query_id WHERE enquery_id = ?;";
+		Object[] parameter = new Object[] { id };
+		List<Query> queries = new ArrayList<Query>();
 		try {
-			queries = jdbcTemplate.query(sql, parameter, queryMapper);
-		}catch(IncorrectResultSizeDataAccessException e){
+				List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, parameter);
+				int rowId = 1;
+				for (Map row : rows) {
+					Query query = new Query();
+					query.setId(rowId);
+					query.setQuery((String)row.get("question"));
+					queries.add(query);
+					rowId++;
+				}		
+			}catch(IncorrectResultSizeDataAccessException e){
 			//Placeholder. Adding better error handling later
 			System.out.println("Cannot find data from database");
 		}
