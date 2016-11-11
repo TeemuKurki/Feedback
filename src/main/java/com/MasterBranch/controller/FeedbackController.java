@@ -27,8 +27,9 @@ public class FeedbackController {
 	}
 	
 	@RequestMapping(value="/addEnquiry", method=RequestMethod.POST)
-	public String saveEnquiry(@ModelAttribute(value="enquiry") Enquiry enquiry) {
+	public String addEnquiry(@ModelAttribute(value="enquiry") Enquiry enquiry) {
 		dao.addEnquiry(enquiry);
+		return "/enquiries";
 	}
 	
 	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.GET)
