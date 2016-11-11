@@ -14,10 +14,10 @@ CREATE TABLE Answer (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE Queries (
-	enquery_id INT (10) NOT NULL,
+	enquiry_id INT (10) NOT NULL,
 	query_id INT (10) NOT NULL,
-	PRIMARY KEY (enquery_id, query_id),
-	FOREIGN KEY (enquery_id) REFERENCES Enquiries (id),
+	PRIMARY KEY (enquiry_id, query_id),
+	FOREIGN KEY (enquiry_id) REFERENCES Enquiries (id),
 	FOREIGN KEY (query_id) REFERENCES Query (id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -28,7 +28,7 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 	
 	public List<Query> getAllQueries(int id){
 
-		String sql = "SELECT Query.id, question FROM Query INNER JOIN Queries ON Query.id = Queries.query_id WHERE enquery_id = ?;";
+		String sql = "SELECT Query.id, question FROM Query INNER JOIN Queries ON Query.id = Queries.query_id WHERE enquiry_id = ?;";
 		Object[] parameter = new Object[] { id };
 		List<Query> queries = new ArrayList<Query>();
 		try {
