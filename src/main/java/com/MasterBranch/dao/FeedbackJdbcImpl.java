@@ -1,5 +1,8 @@
 package com.MasterBranch.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +11,7 @@ import javax.inject.Inject;
 
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -28,7 +32,7 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 	
 	public List<Query> getAllQueries(int id){
 
-		String sql = "SELECT Query.id, question FROM Query INNER JOIN Queries ON Query.id = Queries.query_id WHERE enquery_id = ?;";
+		String sql = "SELECT Query.id, question FROM Query INNER JOIN Queries ON Query.id = Queries.query_id WHERE enquiry_id = ?;";
 		Object[] parameter = new Object[] { id };
 		List<Query> queries = new ArrayList<Query>();
 		try {
@@ -53,4 +57,31 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 		List<Enquiry> enquiries = jdbcTemplate.query(sql, enquiryMapper);
 		return enquiries;
 	}
+
+
+	public void addEnquiry(Enquiry e) {
+		final String sql = "INSERT INTO Enquiries(description) VALUES(?)";
+		final String name = e.getName();
+		jdbcTemplate.update(new PreparedStatementCreator() {	
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, name);
+				return ps;
+			}
+		});
+	}
+
+	public void addQuery(int enquiryId, Query q) {
+		final String sql = "INSERT INTO Query(description) VALUES(?) INNER JOIN Queries ON "
+				+ "Query.id = Queries.query_id WHERE enquery_id = "+enquiryId;
+		final String query = q.getQuery();
+		jdbcTemplate.update(new PreparedStatementCreator() {	
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, query);
+				return ps;
+			}
+		});	
+	}
+	
 }
