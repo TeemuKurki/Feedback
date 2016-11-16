@@ -30,6 +30,13 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
+	public Enquiry getEnquiry(int id) {
+		String sql = "SELECT * FROM Enquiry WHERE id = " + Integer.toString(id) + ";";
+		RowMapper<Enquiry> enquiryMapper = new FeedbackEnquiryRowMapper();
+		Enquiry enquiry = jdbcTemplate.query(sql, enquiryMapper).get(0);
+		return enquiry;
+	}
+	
 	public List<Query> getAllQueries(int id){
 
 		String sql = "SELECT Query.id, question FROM Query INNER JOIN Queries ON Query.id = Queries.query_id WHERE enquiry_id = ?;";
@@ -52,7 +59,7 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 		return queries;
 	}
 	public List<Enquiry> getAllEnquiries(){
-		String sql = "SELECT * FROM Enquiries";
+		String sql = "SELECT * FROM Enquiry";
 		RowMapper<Enquiry> enquiryMapper = new FeedbackEnquiryRowMapper();
 		List<Enquiry> enquiries = jdbcTemplate.query(sql, enquiryMapper);
 		return enquiries;
@@ -60,7 +67,7 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 
 
 	public void addEnquiry(Enquiry e) {
-		final String sql = "INSERT INTO Enquiries(description) VALUES(?)";
+		final String sql = "INSERT INTO Enquiry(description) VALUES(?)";
 		final String name = e.getName();
 		jdbcTemplate.update(new PreparedStatementCreator() {	
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
@@ -73,7 +80,7 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 
 	public void addQuery(int enquiryId, Query q) {
 		final String sql = "INSERT INTO Query(description) VALUES(?) INNER JOIN Queries ON "
-				+ "Query.id = Queries.query_id WHERE enquery_id = "+enquiryId;
+				+ "Query.id = Queries.query_id WHERE enquery_id = " + enquiryId;
 		final String query = q.getQuery();
 		jdbcTemplate.update(new PreparedStatementCreator() {	
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
