@@ -1,8 +1,10 @@
+#Kommentteja!
+#
 #Tables:
-#Enquiries, Query, Answer, Queries, Answers
+#Enquiry, Query, Answer, Queries, Answers
 
 #Hae kyselyt
-SELECT * FROM Enquiries;
+SELECT * FROM Enquiry;
 
 #Hae kyselyn 1 kysymykset
 SELECT question FROM Query 
@@ -22,9 +24,9 @@ WHERE Query.id = 1;
 SELECT description, question FROM Query
 INNER JOIN Queries
 	ON Query.id = query_id
-INNER JOIN Enquiries
-	ON Enquiries.id = Queries.enquery_id
-WHERE Enquiries.id = 1
+INNER JOIN Enquiry
+	ON Enquiry.id = Queries.enquery_id
+WHERE Enquiry.id = 1
 	AND Query.id = 2;
 
 #Hae kyselyn 1 kysymys 1 vastaus 1
@@ -35,8 +37,11 @@ INNER JOIN Query
 	ON Query.id = Answers.query_id
 INNER JOIN Queries
 	ON Queries.query_id = Query.id
-INNER JOIN Enquiries
-	ON Enquiries.id = Queries.enquery_id
-WHERE Enquiries.id = 1
+INNER JOIN Enquiry
+	ON Enquiry.id = Queries.enquery_id
+WHERE Enquiry.id = 1
 	AND Query.id = 1
 	AND Answer.id = 1;
+
+#Tiedon muutos
+#Aseta kyselyn yksi 

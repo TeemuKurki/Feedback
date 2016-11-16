@@ -3,7 +3,7 @@
 #'Onnistuiko transaction?' ja 'Vieläkö toimii?'
 START TRANSACTION;
 SET autocommit=0;
-INSERT INTO Enquiries (description)
+INSERT INTO Enquiry (description)
 	VALUES ('Luminen kysely');
 SET @enquiryID = LAST_INSERT_ID();
 INSERT INTO Query (question)

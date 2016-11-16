@@ -1,7 +1,7 @@
-INSERT INTO Enquiries (description)
+INSERT INTO Enquiry (description)
 VALUES ("Testikysely");
 
-INSERT INTO Enquiries (description)
+INSERT INTO Enquiry (description)
 VALUES ("Toinen testikysely");
 
 INSERT INTO Query (question)

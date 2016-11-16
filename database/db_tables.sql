@@ -1,6 +1,7 @@
-CREATE TABLE Enquiries (
+CREATE TABLE Enquiry (
 	id INT (10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	description VARCHAR (255)
+	description VARCHAR (255),
+	isDeployed BOOLEAN DEFAULT false
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE Query (
@@ -17,7 +18,7 @@ CREATE TABLE Queries (
 	enquiry_id INT (10) NOT NULL,
 	query_id INT (10) NOT NULL,
 	PRIMARY KEY (enquiry_id, query_id),
-	FOREIGN KEY (enquiry_id) REFERENCES Enquiries (id),
+	FOREIGN KEY (enquiry_id) REFERENCES Enquiry (id),
 	FOREIGN KEY (query_id) REFERENCES Query (id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
