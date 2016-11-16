@@ -35,14 +35,16 @@ public class FeedbackController {
 	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.GET)
 	public String editQueries(@PathVariable Integer id, Model model) {
 		List<Query> queries = dao.getAllQueries(id);
+		Enquiry enquiry = dao.getEnquiry(id);
 		model.addAttribute("queries", queries);
-		return "/enquiries/" + Integer.toString(id) + "/edit";
+		model.addAttribute("enquiry", enquiry);
+		return "/enquiries/edit";
 	}
 	
 	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.POST)
 	public String saveQueries(@PathVariable Integer id, @ModelAttribute(value="query") Query query) {
 		dao.addQuery(id, query);
-		return "/enquiries/" + Integer.toString(id) + "/edit";
+		return "/enquiries/edit";
 	}
 	
 	@RequestMapping("/enquiries")
