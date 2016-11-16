@@ -26,25 +26,31 @@ public class FeedbackController {
 		return queries;
 	}
 	
+	@RequestMapping(value="/addEnquiry", method=RequestMethod.GET)
+	public String getCreateForm(Model model) {
+		Enquiry emptyEnquiry = new Enquiry();
+		model.addAttribute("enquiry", emptyEnquiry);
+		return "createForm";
+	}
+	
 	@RequestMapping(value="/addEnquiry", method=RequestMethod.POST)
 	public String addEnquiry(@ModelAttribute(value="enquiry") Enquiry enquiry) {
 		dao.addEnquiry(enquiry);
-		return "/enquiries";
+		return "redirect:/enquiries";
 	}
 	
+	//Ei toimi vielä
 	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.GET)
 	public String editQueries(@PathVariable Integer id, Model model) {
 		List<Query> queries = dao.getAllQueries(id);
-		Enquiry enquiry = dao.getEnquiry(id);
 		model.addAttribute("queries", queries);
-		model.addAttribute("enquiry", enquiry);
-		return "/enquiries/edit";
+		return "createQuery";
 	}
 	
 	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.POST)
-	public String saveQueries(@PathVariable Integer id, @ModelAttribute(value="query") Query query) {
+	public String saveQueries(@PathVariable Integer id, @ModelAttribute(value="queries") Query query) {
 		dao.addQuery(id, query);
-		return "/enquiries/edit";
+		return "/enquiries/" + Integer.toString(id) + "/edit";
 	}
 	
 	@RequestMapping("/enquiries")
