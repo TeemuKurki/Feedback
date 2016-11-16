@@ -28,6 +28,12 @@ VALUES ("Kyllä");
 INSERT INTO Answer (answer)
 VALUES ("Aina on hyvä päivä. Ja joulu xdd");
 
+INSERT INTO User (email, password)
+VALUES ("tomi.testaaja@koulu.fi", "suolattuSalis");
+
+INSERT INTO User (email, password)
+VALUES ("erik.erimieli@koulu.fi", "eiSuolaaKiitos666");
+
 INSERT INTO Queries (enquiry_id, query_id)
 VALUES (1,1);
 
