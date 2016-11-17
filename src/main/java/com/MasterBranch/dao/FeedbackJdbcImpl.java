@@ -62,6 +62,10 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 		String sql = "SELECT * FROM Enquiry";
 		RowMapper<Enquiry> enquiryMapper = new FeedbackEnquiryRowMapper();
 		List<Enquiry> enquiries = jdbcTemplate.query(sql, enquiryMapper);
+		for(int i = 0; i < enquiries.size(); i++) {
+			List<Query> queries = getAllQueries(enquiries.get(i).getId());
+			enquiries.get(i).setQueries(queries);
+		}
 		return enquiries;
 	}
 
