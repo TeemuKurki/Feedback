@@ -83,8 +83,7 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 	}
 
 	public void addQuery(int enquiryId, Query q) {
-		final String sql = "INSERT INTO Query(description) VALUES(?) INNER JOIN Queries ON "
-				+ "Query.id = Queries.query_id WHERE enquery_id = " + enquiryId;
+		final String sql = "INSERT INTO Query(question) VALUES(?);";
 		final String query = q.getQuery();
 		jdbcTemplate.update(new PreparedStatementCreator() {	
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
@@ -93,6 +92,13 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 				return ps;
 			}
 		});	
+		final String sql2 = "INSERT INTO Queries(enquiry_id,query_id) VALUES ("+enquiryId+",LAST_INSERT_ID())";
+		jdbcTemplate.update(new PreparedStatementCreator() {	
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement ps = con.prepareStatement(sql2);
+				return ps;
+			}
+		});
 	}
 	
 }

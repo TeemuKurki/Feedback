@@ -10,7 +10,7 @@ SELECT * FROM Enquiry;
 SELECT question FROM Query 
 INNER JOIN Queries 
 	ON Query.id = Queries.query_id 
-WHERE enquery_id = 1;
+WHERE enquiry_id = 1;
 
 #Hae kysymyksen 1 vastaukset
 SELECT answer FROM Answer 
@@ -25,7 +25,7 @@ SELECT description, question FROM Query
 INNER JOIN Queries
 	ON Query.id = query_id
 INNER JOIN Enquiry
-	ON Enquiry.id = Queries.enquery_id
+	ON Enquiry.id = Queries.enquiry_id
 WHERE Enquiry.id = 1
 	AND Query.id = 2;
 
@@ -38,7 +38,7 @@ INNER JOIN Query
 INNER JOIN Queries
 	ON Queries.query_id = Query.id
 INNER JOIN Enquiry
-	ON Enquiry.id = Queries.enquery_id
+	ON Enquiry.id = Queries.enquiry_id
 WHERE Enquiry.id = 1
 	AND Query.id = 1
 	AND Answer.id = 1;
