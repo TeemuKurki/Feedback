@@ -39,18 +39,19 @@ public class FeedbackController {
 		return "redirect:/enquiries";
 	}
 	
-	//Ei toimi vielä
 	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.GET)
 	public String editQueries(@PathVariable Integer id, Model model) {
 		List<Query> queries = dao.getAllQueries(id);
+		Enquiry enquiry = dao.getEnquiry(id);
 		model.addAttribute("queries", queries);
-		return "createQuery";
+		model.addAttribute("enquiry", enquiry);
+		return "/enquiries/edit";
 	}
 	
 	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.POST)
 	public String saveQueries(@PathVariable Integer id, @ModelAttribute(value="queries") Query query) {
 		dao.addQuery(id, query);
-		return "/enquiries/" + Integer.toString(id) + "/edit";
+		return "redirect:/enquiries/" + Integer.toString(id) + "/edit";
 	}
 	
 	@RequestMapping("/enquiries")
