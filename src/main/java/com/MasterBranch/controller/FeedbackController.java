@@ -54,7 +54,14 @@ public class FeedbackController {
 		return "redirect:/enquiries/" + Integer.toString(id) + "/edit";
 	}
 	
-	@RequestMapping("/enquiries")
+	@RequestMapping(value="/enquiries/", method=RequestMethod.GET)
+	public String showAll(Model model) {
+		model.addAttribute("enquiries", dao.getAllEnquiries());
+		return "/enquiries/showAll";
+		
+	}
+	
+	@RequestMapping("/enquiries.json")
 	public @ResponseBody List<Enquiry> getAllEnquiries() {
 		List<Enquiry> enquiries = dao.getAllEnquiries();
 		return enquiries;

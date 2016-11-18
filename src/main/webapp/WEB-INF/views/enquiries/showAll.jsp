@@ -5,16 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><c:out value="${enquiry.name}"/></title>
+<title>Show All Enquiries</title>
 </head>
 <body>
-<h1><c:out value="${enquiry.name}"/></h1>
-<form method="post">
-	<c:forEach items="${queries}" var="q">
-	<p><c:out value="${q.id}"></c:out></p>
-	<p><c:out value="${q.query}"></c:out></p>
-	<p><c:out value="${q.answer}"></c:out></p>
+	<c:forEach items="${enquiries}" var="e">
+	<h1><a href="${e.id}/edit"><c:out value="${e.id}"/>. <c:out value="${e.name}"/></a></h1>
+	<!--<p><c:forEach items="${e.queries}" var="q">
+		<p><c:out value="${q.id}"/>. <c:out value="${q.query}"/></p>
+		</c:forEach> </p>-->
 	</c:forEach>
-</form>
 </body>
 </html>
