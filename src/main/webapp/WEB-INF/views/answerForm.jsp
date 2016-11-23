@@ -19,9 +19,9 @@
 	</div>
 	<div class="page-header">
 		<div class="btn-group btn-group-justified">
-			<a href="welcome.jsp" class="btn btn-warning btn-lg">Front Pageee</a>
-  			<a href="createForm.jsp" class="btn btn-warning btn-lg">Create Form</a>
-  			<a href="createQuery.jsp" class="btn btn-warning btn-lg">Create Query</a>
+			<a href="/Feedback/" class="btn btn-warning btn-lg">Front Pageee</a>
+  			<a href="/Feedback/addEnquiry/" class="btn btn-warning btn-lg">Create Form</a>
+  			<a href="/Feedback/enquiries/" class="btn btn-warning btn-lg">Create Query</a>
 		</div>
 	</div>
 	

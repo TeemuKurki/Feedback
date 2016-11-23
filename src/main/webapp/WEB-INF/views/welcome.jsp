@@ -16,9 +16,9 @@
 	</div>	
 	<div class="nav">
 		<div class="btn-group btn-group-justified">
-			<a href="./" class="btn btn-warning btn-lg active">Front Pageee</a>
-  			<a href="addEnquiry" class="btn btn-warning btn-lg">Create Form</a>
-  			<a href="enquiries/" class="btn btn-warning btn-lg">Enquiries</a>
+			<a href="/Feedback/" class="btn btn-warning btn-lg active">Front Pageee</a>
+  			<a href="/Feedback/addEnquiry/" class="btn btn-warning btn-lg">Create Form</a>
+  			<a href="/Feedback/enquiries/" class="btn btn-warning btn-lg">Enquiries</a>
 		</div>
 	</div>
 	
@@ -33,8 +33,8 @@
 				</p>
 				<select name="Enquiry select" onchange="location = this.value;">
 					<option value="">Select Enquiry id</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
+					<option value="/Feedback/enquiries/1/edit">1</option>
+					<option value="/Feedback/enquiries/2/edit">2</option>
 				</select>			
 			</div>
 			<div class="col-sm-3"></div>

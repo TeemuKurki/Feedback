@@ -19,7 +19,7 @@
 	</div>
 	<div class="nav">
 		<div class="btn-group btn-group-justified">
-			<a href="../" class="btn btn-warning btn-lg active">Enquiries</a>
+			<a href="/Feedback/enquiries/" class="btn btn-warning btn-lg active">Enquiries</a>
 		</div>
 	</div>
 	
@@ -32,7 +32,6 @@
 <c:forEach items="${queries}" var="q">
 <p><c:out value="${q.id}"></c:out></p>
 <p> <a href="${q.dbId}">  <c:out value="${q.query}"></c:out></a></p>
-<p><c:out value="${q.answer}"></c:out></p>
 </c:forEach>
 <br><br>
 

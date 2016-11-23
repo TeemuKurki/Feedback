@@ -19,9 +19,9 @@
 	</div>
 	<div class="nav">
 		<div class="btn-group btn-group-justified">
-			<a href="./" class="btn btn-warning btn-lg">Front Pageee</a>
-  			<a href="addEnquiry" class="btn btn-warning btn-lg active">Create Form</a>
-			<a href="enquiries/" class="btn btn-warning btn-lg">Enquiries</a>
+			<a href="/Feedback/" class="btn btn-warning btn-lg">Front Pageee</a>
+  			<a href="/Feedback/addEnquiry/" class="btn btn-warning btn-lg active">Create Form</a>
+			<a href="/Feedback/enquiries/" class="btn btn-warning btn-lg">Enquiries</a>
 		</div>
 	</div>
 	
