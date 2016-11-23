@@ -1,8 +1,8 @@
 package com.MasterBranch.bean;
 
 public class Answer {
-	private String answer;
 	private int id;
+	private String answer;
 	
 	public Answer() {
 		super();

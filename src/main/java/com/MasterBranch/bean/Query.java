@@ -8,9 +8,9 @@ public class Query {
 	private String query;
 	private int queryType; // 0 = default/string, 1 = checkbox/Options
 	private List<Option> options;
-	private String answer;
 	
 	public Query() {
+		super();
 		this.id = 0;
 		this.queryType = 0;
 		this.query = "";
@@ -45,15 +45,7 @@ public class Query {
 	public void setDbId(int dbId) {
 		this.dbId = dbId;
 	}
-	
-	public String getAnswer() {
-		return this.answer;
-	}
-	
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
-	
+
 	public void setQueryType(int type) {
 		this.queryType = type;
 	}
@@ -70,8 +62,18 @@ public class Query {
 		this.query = query;
 	}
 	
+	public void addOption(Option option) {
+		if(this.options != null) {
+			this.options.add(option);
+		}
+	}
+	
 	public void setOptions(List<Option> options) {
 		this.options = options;
+	}
+	
+	public List<Option> getOptions() {
+		return this.options;
 	}
 	
 }

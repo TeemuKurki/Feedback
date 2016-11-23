@@ -41,15 +41,14 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 	}
 	
 	public Query getQuery(int id) {
-		String sql = "SELECT * FROM Query WHERE id = " + Integer.toString(id) + ";";
-		Object[] parameter = new Object[] { id };
+		String sql = "SELECT * FROM Query WHERE id = " + Integer.toString(id);
 		RowMapper<Query> queryMapper = new FeedbackQueryRowMapper();
 		Query query = jdbcTemplate.query(sql, queryMapper).get(0);
 		if(query.getQueryType() == 1) {
 			String optionSQL = "SELECT Option.id, optionValue FROM Option INNER JOIN Options ON Option.id = Options.option_id INNER JOIN Query ON query_id=Query.id WHERE query_id = ?;";
 			List<Option> options = new ArrayList<Option>();
 			try {
-				List<Map<String, Object>> rows = jdbcTemplate.queryForList(optionSQL, parameter);
+				List<Map<String, Object>> rows = jdbcTemplate.queryForList(optionSQL, id);
 				int rowId = 1;
 				for (Map row : rows) {
 					Option option = new Option();
@@ -57,15 +56,21 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 					option.setOptionValue((String)row.get("optionValue"));
 					options.add(option);
 					rowId++;
-				}		
+				}
+				System.out.println(query.toString());
 			} catch(IncorrectResultSizeDataAccessException e){
 				//Placeholder. Adding better error handling later
 				System.out.println("Cannot find data from database");
 			}
 			query.setOptions(options);
 		}
-		
+		System.out.println(query);
 		return query;
+	}
+	
+	public List<Query> getQueries(int enquiryId) {
+		List<Query> queries = new ArrayList<Query>();
+		return queries;
 	}
 	
 	public List<Query> getAllQueries(int id){
@@ -77,10 +82,8 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 				List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, parameter);
 				int rowId = 1;
 				for (Map row : rows) {
-					Query query = new Query();
+					Query query = getQuery((Integer)row.get("id"));
 					query.setId(rowId);
-					query.setDbId((Integer)row.get("id"));
-					query.setQuery((String)row.get("question"));
 					queries.add(query);
 					rowId++;
 				}		
