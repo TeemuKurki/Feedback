@@ -16,7 +16,7 @@
 	
 	<div class="nav">
 		<div class="btn-group btn-group-justified">
-			<a href="welcome.jsp" class="btn btn-warning btn-lg">Front Pageee</a>
+			<a href="./" class="btn btn-warning btn-lg">Front Pageee</a>
   			<a href="createForm.jsp" class="btn btn-warning btn-lg">Create Form</a>
   			<a href="createQuery.jsp" class="btn btn-warning btn-lg">Create Query</a>
 		</div>

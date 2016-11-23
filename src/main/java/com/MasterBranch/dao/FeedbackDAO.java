@@ -7,6 +7,7 @@ import com.MasterBranch.bean.Query;
 
 public interface FeedbackDAO {
 	public Enquiry getEnquiry(int id);
+	public Query getQuery(int id);
 	public List<Query> getAllQueries(int enquiryId);
 	public List<Enquiry> getAllEnquiries();
 	public void addEnquiry(Enquiry enquiry);
