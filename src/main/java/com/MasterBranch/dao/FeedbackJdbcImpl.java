@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.MasterBranch.bean.Enquiry;
+import com.MasterBranch.bean.Option;
 import com.MasterBranch.bean.Query;
 @Repository
 public class FeedbackJdbcImpl implements FeedbackDAO {
@@ -37,6 +38,34 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 		return enquiry;
 	}
 	
+	public Query getQuery(int id) {
+		String sql = "SELECT * FROM Query WHERE id = " + Integer.toString(id) + ";";
+		Object[] parameter = new Object[] { id };
+		RowMapper<Query> queryMapper = new FeedbackQueryRowMapper();
+		Query query = jdbcTemplate.query(sql, queryMapper).get(0);
+		if(query.getQueryType() == 1) {
+			String optionSQL = "SELECT Option.id, optionValue FROM Option INNER JOIN Options ON Option.id = Options.option_id INNER JOIN Query ON query_id=Query.id WHERE query_id = ?;";
+			List<Option> options = new ArrayList<Option>();
+			try {
+				List<Map<String, Object>> rows = jdbcTemplate.queryForList(optionSQL, parameter);
+				int rowId = 1;
+				for (Map row : rows) {
+					Option option = new Option();
+					option.setId((Integer)row.get("id"));
+					option.setOptionValue((String)row.get("optionValue"));
+					options.add(option);
+					rowId++;
+				}		
+			} catch(IncorrectResultSizeDataAccessException e){
+				//Placeholder. Adding better error handling later
+				System.out.println("Cannot find data from database");
+			}
+			query.setOptions(options);
+		}
+		
+		return query;
+	}
+	
 	public List<Query> getAllQueries(int id){
 
 		String sql = "SELECT Query.id, question FROM Query INNER JOIN Queries ON Query.id = Queries.query_id WHERE enquiry_id = ?;";
@@ -48,6 +77,7 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 				for (Map row : rows) {
 					Query query = new Query();
 					query.setId(rowId);
+					query.setDbId((Integer)row.get("id"));
 					query.setQuery((String)row.get("question"));
 					queries.add(query);
 					rowId++;
@@ -68,7 +98,14 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 		}
 		return enquiries;
 	}
-
+	
+	public void deleteQuery(int enquiryId, int queryId) {
+		
+	}
+	
+	public void deleteEnquiry(int id) {
+		
+	}
 
 	public void addEnquiry(Enquiry e) {
 		final String sql = "INSERT INTO Enquiry(description) VALUES(?)";

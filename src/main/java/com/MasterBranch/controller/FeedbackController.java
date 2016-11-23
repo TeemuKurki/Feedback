@@ -24,8 +24,15 @@ public class FeedbackController {
 	public String root() {
 		return "welcome";
 	}
+
+	@RequestMapping(value="/queries/{id}")
+	public @ResponseBody Query singleQuery(@PathVariable Integer id) {
+		Query query = dao.getQuery(id);
+		System.out.println(query);
+		return query;
+	}
 	
-	@RequestMapping("/{id}")
+	@RequestMapping("/enquiries/{id}")
 	public @ResponseBody List<Query> getAllQueries(@PathVariable Integer id) {
 		List<Query> queries = dao.getAllQueries(id);
 		return queries;
@@ -56,17 +63,21 @@ public class FeedbackController {
 	}
 	
 	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.POST)
-	public String saveQueries(@PathVariable Integer id, @ModelAttribute(value="query") Query query) {
-		System.out.println("delete testi 3");
+	public String saveQuery(@PathVariable Integer id, @ModelAttribute(value="query") Query query) {
 		dao.addQuery(id, query);
-		return "redirect:/enquiries/" + Integer.toString(id) + "/edit";
+		return "redirect:/enquiries" + Integer.toString(id) + "/edit";
 	}
 	
-	@RequestMapping(value="/enquiries/", method=RequestMethod.GET)
+	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.DELETE)
+	public String deleteQuery(@PathVariable Integer id, @ModelAttribute(value="query") Query query) {
+		dao.addQuery(id, query);
+		return "redirect:/enquiries" + Integer.toString(id) + "/edit";
+	}
+	
+	@RequestMapping(value="enquiries", method=RequestMethod.GET)
 	public String showAll(Model model) {
 		model.addAttribute("enquiries", dao.getAllEnquiries());
 		return "/enquiries/showAll";
-		
 	}
 	
 	@RequestMapping("/enquiries.json")

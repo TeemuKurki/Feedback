@@ -12,8 +12,8 @@ public class FeedbackQueryRowMapper implements RowMapper<Query> {
 	public Query mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Query q = new Query();
 		q.setId(rs.getInt("id"));
-		q.setAnswer(rs.getString("answer"));
-		q.setQuery(rs.getString("query"));
+		q.setQueryType(rs.getInt("questionType"));
+		q.setQuery(rs.getString("query"));		
 		return q;
 	}
 
