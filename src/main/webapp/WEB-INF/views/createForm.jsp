@@ -17,17 +17,22 @@
 	<div class="jumbotron" id="headerjumbotron">
 		<h1 class="text-center">Tervetuloa testisivulle</h1>
 	</div>
-	<div class="page-header">
+	<div class="nav">
 		<div class="btn-group btn-group-justified">
-			<a href="welcome.jsp" class="btn btn-warning btn-lg">Front Pageee</a>
-  			<a href="createForm.jsp" class="btn btn-warning btn-lg">Create Form</a>
-  			<a href="createQuery.jsp" class="btn btn-warning btn-lg">Create Query</a>
+			<a href="./" class="btn btn-warning btn-lg">Front Pageee</a>
+  			<a href="addEnquiry" class="btn btn-warning btn-lg active">Create Form</a>
+			<a href="enquiries/" class="btn btn-warning btn-lg">Enquiries</a>
 		</div>
 	</div>
 	
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6">
+	
 			<form:form modelAttribute="enquiry" method="post">
 		  	<fieldset>		
-				<legend>Lis‰‰ uusi kysely</legend>
+				<legend><h1>Lis‰‰ uusi kysely</h1></legend>
 				<p>
 					<form:label	path="name">Uusi kysely</form:label><br/>
 					<form:input path="name" />		
@@ -35,6 +40,8 @@
 				<p>	
 					<button type="submit">Lis‰‰</button>
 				</p>
+				</div>
+				<div class="col-sm-3"></div>
 			</fieldset>
 		</form:form>
 
