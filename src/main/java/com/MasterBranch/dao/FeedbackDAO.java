@@ -2,6 +2,7 @@ package com.MasterBranch.dao;
 
 import java.util.List;
 
+import com.MasterBranch.bean.Answer;
 import com.MasterBranch.bean.Enquiry;
 import com.MasterBranch.bean.Query;
 
@@ -11,4 +12,5 @@ public interface FeedbackDAO {
 	public List<Enquiry> getAllEnquiries();
 	public void addEnquiry(Enquiry enquiry);
 	public void addQuery(int id,Query query);
+	public void addAnswer(int queryId, Answer a);
 }

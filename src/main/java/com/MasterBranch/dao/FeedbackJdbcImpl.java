@@ -14,7 +14,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.MasterBranch.bean.Answer;
 import com.MasterBranch.bean.Enquiry;
 import com.MasterBranch.bean.Query;
 @Repository
@@ -48,6 +50,7 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 				for (Map row : rows) {
 					Query query = new Query();
 					query.setId(rowId);
+					query.setDbId((Integer)(row.get("id")));
 					query.setQuery((String)row.get("question"));
 					queries.add(query);
 					rowId++;
@@ -69,7 +72,6 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 		return enquiries;
 	}
 
-
 	public void addEnquiry(Enquiry e) {
 		final String sql = "INSERT INTO Enquiry(description) VALUES(?)";
 		final String name = e.getName();
@@ -82,6 +84,7 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 		});
 	}
 
+	@Transactional
 	public void addQuery(int enquiryId, Query q) {
 		final String sql = "INSERT INTO Query(question) VALUES(?);";
 		final String query = q.getQuery();
@@ -93,6 +96,25 @@ public class FeedbackJdbcImpl implements FeedbackDAO {
 			}
 		});	
 		final String sql2 = "INSERT INTO Queries(enquiry_id,query_id) VALUES ("+enquiryId+",LAST_INSERT_ID())";
+		jdbcTemplate.update(new PreparedStatementCreator() {	
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement ps = con.prepareStatement(sql2);
+				return ps;
+			}
+		});
+	}
+	
+	public void addAnswer(int queryId, Answer a){
+		final String sql = "INSERT INTO Answer(answer) VALUES(?)";
+		final String answer = a.getAnswer();
+		jdbcTemplate.update(new PreparedStatementCreator() {	
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, answer);
+				return ps;
+			}
+		});
+		final String sql2 = "INSERT INTO Answers(query_id,answer_id) VALUES ("+queryId+",LAST_INSERT_ID())";
 		jdbcTemplate.update(new PreparedStatementCreator() {	
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 				PreparedStatement ps = con.prepareStatement(sql2);

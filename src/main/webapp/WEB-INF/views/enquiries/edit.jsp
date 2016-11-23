@@ -12,11 +12,8 @@
 <h1><c:out value="${enquiry.name}"/></h1>
 <c:forEach items="${queries}" var="q">
 <p><c:out value="${q.id}"></c:out></p>
-<p><c:out value="${q.query}"></c:out></p>
+<p> <a href="${q.dbId}">  <c:out value="${q.query}"></c:out></a></p>
 <p><c:out value="${q.answer}"></c:out></p>
-<form:form modelAttribute="delete_query" method="delete">
-			<button type="submit">Delete</button>
-</form:form>
 </c:forEach>
 <br><br>
 

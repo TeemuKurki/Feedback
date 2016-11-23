@@ -1,20 +1,31 @@
 package com.MasterBranch.bean;
 
+import java.util.List;
+
 public class Query {
 	private int id;
+	private int dbId;
 	private String query;
-	private String answer;
+	private List<Answer> answer;
 	
 	public Query() {
 		this.id = 0;
 		this.query = "";
-		this.answer = "";
+		this.dbId = 0;
 	}
 	
-	public Query(int id, String query) {
+	public Query(int id, String query, int dbId) {
 		this.id = id;
 		this.query = query;
-		this.answer = "";
+		this.dbId = dbId;
+	}
+
+	public int getDbId() {
+		return dbId;
+	}
+
+	public void setDbId(int dbId) {
+		this.dbId = dbId;
 	}
 
 	@Override
@@ -29,14 +40,6 @@ public class Query {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public String getAnswer() {
-		return this.answer;
-	}
-	
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
 
 	public String getQuery() {
 		return query;
@@ -44,5 +47,17 @@ public class Query {
 
 	public void setQuery(String query) {
 		this.query = query;
+	}
+
+	public List<Answer> getAnswer() {
+		return answer;
+	}
+	
+	public void addAnswer(Answer a) {
+		if(answer != null) answer.add(a);
+	}
+
+	public void setAnswer(List<Answer> answer) {
+		this.answer = answer;
 	}
 }
