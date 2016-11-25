@@ -72,7 +72,7 @@ public class FeedbackController {
 	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.DELETE)
 	public String deleteQuery(@PathVariable Integer id, @ModelAttribute(value="query") Query query) {
 		dao.addQuery(id, query);
-		return "redirect:/enquiries" + Integer.toString(id) + "/edit";
+		return "redirect:/enquiries/" + Integer.toString(id) + "/edit";
 	}
 	
 	@RequestMapping(value="enquiries", method=RequestMethod.GET)
