@@ -18,7 +18,7 @@ import com.MasterBranch.model.Query;
 import com.MasterBranch.repository.AnswerRepository;
 import com.MasterBranch.repository.EnquiryRepository;
 import com.MasterBranch.repository.QueryRepository;
-@RestController
+@Controller
 public class FeedbackController {
 	
 	@Autowired
@@ -28,8 +28,8 @@ public class FeedbackController {
 	@Autowired
 	private AnswerRepository answerRepository;
 	
-	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String root() {
+	@RequestMapping(value="/")
+	public String index() {
 		return "index";
 	}
 
