@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class FeedBackEndApplication {
 	
-	private static final Logger log = LoggerFactory.getLogger(FeedBackEndApplication.class);
 	
 	public static void main(String[] args) {
 		SpringApplication.run(FeedBackEndApplication.class, args);

@@ -5,8 +5,6 @@ public class Option {
 	private String optionValue;
 	
 	public Option() {
-		this.id = 0;
-		this.optionValue = "";
 	}
 	
 	public Option(int id, String optionValue, String type) {

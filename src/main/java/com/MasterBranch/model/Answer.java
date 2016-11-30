@@ -17,7 +17,7 @@ public class Answer implements Serializable {
     @Column(nullable = false)
 	private String answer;
 	
-	protected Answer() {
+	public Answer() {
 		super();
 	}
 
