@@ -2,27 +2,42 @@ package com.MasterBranch.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "Query")
 public class Query {
-	private int id;
-	private int dbId;
-	private String query;
-	private int queryType; // 0 = default/string, 1 = checkbox/Options
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	
+	@NotNull
+	private int enquiry_id;
+	
+	@NotNull
+	private String question;
+	
+	@NotNull
+	private int questionType; // 0 = default/string, 1 = checkbox/Options
+	
 	private List<Option> options;
 	private List<Answer> answer;
 	
 	public Query() {
-		super();
-		this.id = 0;
-		this.queryType = 0;
-		this.query = "";
-		this.dbId = 0;
 	}
 	
-	public Query(int id, int dbId, int type, String query) {
+	public Query(long id, int enquiry_id, String question, int questionType) {
+		super();
 		this.id = id;
-		this.dbId = dbId;
-		this.query = query;
-		this.queryType = type;
+		this.enquiry_id = enquiry_id;
+		this.question = question;
+		this.questionType = questionType;
 	}
 
 	
@@ -35,8 +50,8 @@ public class Query {
 		this.answer = answer;
 	}
 
-	public int getDbId() {
-		return dbId;
+	public int enquiryId() {
+		return enquiry_id;
 	}
 
 
@@ -45,7 +60,7 @@ public class Query {
 		return "";
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -53,24 +68,24 @@ public class Query {
 		this.id = id;
 	}
 	
-	public void setDbId(int dbId) {
-		this.dbId = dbId;
+	public void setEnquiryId(int enquiry_id) {
+		this.enquiry_id = enquiry_id;
 	}
 
-	public void setQueryType(int type) {
-		this.queryType = type;
+	public void setQueryType(int questionType) {
+		this.questionType = questionType;
 	}
 	
 	public int getQueryType() {
-		return this.queryType;
+		return this.questionType;
 	}
 
-	public String getQuery() {
-		return query;
+	public String getQuestion() {
+		return question;
 	}
 
-	public void setQuery(String query) {
-		this.query = query;
+	public void setQuery(String question) {
+		this.question = question;
 	}
 	
 	public void addOption(Option option) {

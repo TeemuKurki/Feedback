@@ -2,6 +2,7 @@ package com.MasterBranch.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,18 +11,22 @@ import javax.persistence.Id;
 @Entity
 public class Enquiry {
 	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	@Column(nullable = false)
 	private String name;
+	
+	@Column(nullable = false)
 	private boolean isDeployed;
+	
 	private List<Query> queries;
 	
 	public Enquiry() {
 		super();
 	}
 	
-	public Enquiry(int id, String name) {
+	public Enquiry(int id, String name, boolean isDeployed) {
 		this.id = id;
 		this.name = name;
 		this.isDeployed = false;
