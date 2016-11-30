@@ -1,12 +1,21 @@
 package com.MasterBranch.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Option {
-	private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	
+	@Column(nullable = false)
 	private String optionValue;
 	
-	public Option() {
-		this.id = 0;
-		this.optionValue = "";
+	protected Option() {
 	}
 	
 	public Option(int id, String optionValue, String type) {
@@ -14,7 +23,7 @@ public class Option {
 		this.optionValue = optionValue;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
