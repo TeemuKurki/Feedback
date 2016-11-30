@@ -26,8 +26,8 @@ public class Query {
 	@NotNull
 	private int questionType; // 0 = default/string, 1 = checkbox/Options
 	
-	private List<Option> options;
-	private List<Answer> answer;
+	//private List<Option> options;
+	//private List<Answer> answer;
 	
 	public Query() {
 	}
@@ -41,7 +41,7 @@ public class Query {
 	}
 
 	
-	
+	/*
 	public List<Answer> getAnswer() {
 		return answer;
 	}
@@ -49,6 +49,7 @@ public class Query {
 	public void setAnswer(List<Answer> answer) {
 		this.answer = answer;
 	}
+	*/
 
 	public int enquiryId() {
 		return enquiry_id;
@@ -88,6 +89,7 @@ public class Query {
 		this.question = question;
 	}
 	
+	/*
 	public void addOption(Option option) {
 		if(this.options != null) {
 			this.options.add(option);
@@ -101,5 +103,5 @@ public class Query {
 	public List<Option> getOptions() {
 		return this.options;
 	}
-	
+	*/
 }

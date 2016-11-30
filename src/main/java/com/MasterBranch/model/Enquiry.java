@@ -3,6 +3,7 @@ package com.MasterBranch.model;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,7 @@ public class Enquiry {
 	@Column(nullable = false)
 	private boolean isDeployed;
 	
+    @ElementCollection(targetClass=Integer.class)
 	private List<Query> queries;
 	
 	public Enquiry() {

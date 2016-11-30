@@ -30,7 +30,7 @@ public class FeedbackController {
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String root() {
-		return "welcome";
+		return "index";
 	}
 
 	@RequestMapping(value="/queries/{id}")
