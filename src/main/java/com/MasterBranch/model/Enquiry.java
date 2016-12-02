@@ -13,12 +13,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "Enquiry")
 public class Enquiry {
 	private int id;
 	private String name;
 	private boolean isDeployed;
+	
+	@JsonManagedReference
 	private Set<Query> queries;
 	
 	public Enquiry() {

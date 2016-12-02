@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Query {
 	private int id;
@@ -60,6 +62,7 @@ public class Query {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="enquiry_id")
+	@JsonBackReference
 	public Enquiry getEnquiry() {
 		return this.enquiry;
 	}

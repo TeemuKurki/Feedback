@@ -1,5 +1,8 @@
 package com.MasterBranch;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,13 +26,17 @@ public class Application {
 	public CommandLineRunner demo(QueryRepository qrepository, EnquiryRepository erepository) {
 		return (args) -> {
 			// save students
-			Enquiry e = new Enquiry("Testi Kysely", false);
-			Query q = new Query(e,"Testi kysymys", 0); 
-			Query q1 = new Query(e,"Ääkköset", 0); 
-			
-			erepository.save(e);
-			qrepository.save(q);
-			qrepository.save(q1);
+			Enquiry enquiry = new Enquiry("Testi Kysely", false);
+	        Set querySet = new HashSet<Query>(){{
+	            add(new Query(enquiry, "Kysymys 1", 0));
+	            add(new Query(enquiry, "Kysymys 2", 0));
+	            add(new Query(enquiry, "Kysymys 3", 0));
+	        }};
+	        enquiry.setQueries(querySet);
+	        
+	        erepository.save(new HashSet<Enquiry>() {{
+	            add(enquiry);
+	        }});
 
 		};
 	}
