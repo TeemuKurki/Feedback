@@ -25,6 +25,9 @@ public class FeedbackController {
 
 	@Autowired
 	private QueryRepository queryRepository;
+
+	@Autowired
+	private EnquiryRepository enquiryRepository;
 	
 	@RequestMapping("/")
 	public String index() {
@@ -36,6 +39,13 @@ public class FeedbackController {
 		List<Query> queries = queryRepository.findAll();
 		System.out.println(queries);
 		return queries;
+}
+
+	@RequestMapping(value="/enquiries/{id}")
+	public @ResponseBody Enquiry allEnquiries(@PathVariable int id) {
+		Enquiry e = enquiryRepository.findOne(id);
+		System.out.println(e);
+		return e;
 	}
     /*
 	@RequestMapping(value="/queries/{id}")
