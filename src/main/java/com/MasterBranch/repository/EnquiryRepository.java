@@ -7,6 +7,5 @@ import com.MasterBranch.model.Enquiry;
 
 public interface EnquiryRepository  extends JpaRepository<Enquiry, Long>{
 
-	public Enquiry findOneById(int id);
 
 }

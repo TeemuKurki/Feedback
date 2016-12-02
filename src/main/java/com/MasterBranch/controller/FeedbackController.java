@@ -25,10 +25,26 @@ public class FeedbackController {
 
 	@Autowired
 	private QueryRepository queryRepository;
+	@Autowired
+	private EnquiryRepository enquiryRepository;
+	@Autowired
+	private AnswerRepository answerRepository;
 	
 	@RequestMapping("/")
 	public String index() {
 		return "index";
+	}
+	
+	@RequestMapping("/answers")
+	public @ResponseBody List<Answer> allAnswers() {
+		List<Answer> answers = answerRepository.findAll();
+		return answers;
+	}
+	
+	@RequestMapping("/enquiries")
+	public @ResponseBody List<Enquiry> allEnquiries() {
+		List<Enquiry> enquiries = enquiryRepository.findAll();
+		return enquiries;
 	}
 	
 	@RequestMapping("/queries")
@@ -37,34 +53,34 @@ public class FeedbackController {
 		System.out.println(queries);
 		return queries;
 	}
-    /*
+    
 	@RequestMapping(value="/queries/{id}")
-	public @ResponseBody Query singleQuery(@PathVariable Long id) {
+	public @ResponseBody Query singleQuery(@PathVariable int id) {
 		Query query = queryRepository.findOne(id);
-		System.out.println(query);
 		return query;
 	}
 	
+	
 	@RequestMapping("/enquiries/{id}")
-	public @ResponseBody String getAllQueries(@PathVariable Integer id) {
-		//List<Query> queries = queryRepository.findById(id);
-		return "";
+	public @ResponseBody Enquiry getEnquiry(@PathVariable Long id) {
+		Enquiry enq = enquiryRepository.findOne(id);
+		return enq;
 	}
-	*/
+	
 	
 	@RequestMapping(value="/addEnquiry", method=RequestMethod.GET)
 	public String getCreateForm(Model model) {
 		Enquiry emptyEnquiry = new Enquiry();
 		model.addAttribute("enquiry", emptyEnquiry);
-		return "createForm";
+		return "addEnquiry";
 	}
-	/*
+	
 	@RequestMapping(value="/addEnquiry", method=RequestMethod.POST)
 	public String addEnquiry(@ModelAttribute(value="enquiry") Enquiry enquiry) {
 		enquiryRepository.save(enquiry);
-		return "redirect:/enquiries/";
+		return "redirect:/enquiries";
 	}
-	
+	/*
 	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.GET)
 	public String editQueries(@PathVariable Integer id, Model model) {
 		Query query = new Query();

@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class Query {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private int id;
 	private int enquiry_id;
 	private String question;
 	private int questionType; // 0 = default/string, 1 = checkbox/Options
