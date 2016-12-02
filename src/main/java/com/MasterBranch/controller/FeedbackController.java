@@ -26,12 +26,12 @@ public class FeedbackController {
 	@Autowired
 	private QueryRepository queryRepository;
 	
-	@RequestMapping(value="/")
+	@RequestMapping("/")
 	public String index() {
 		return "index";
 	}
 	
-	@RequestMapping(value="/queries")
+	@RequestMapping("/queries")
 	public @ResponseBody List<Query> allQueries() {
 		List<Query> queries = queryRepository.findAll();
 		System.out.println(queries);
