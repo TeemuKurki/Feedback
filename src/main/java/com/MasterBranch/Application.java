@@ -17,4 +17,14 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 	
+	@Bean
+	public CommandLineRunner demo(QueryRepository repository) {
+		return (args) -> {
+			// save students
+			Query q = new Query("Testi kysymys", 0); 
+			
+			repository.save(q);
+
+		};
+	}
 }
