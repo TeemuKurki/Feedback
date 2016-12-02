@@ -52,6 +52,13 @@ public class FeedbackController {
 		List<Query> queries = queryRepository.findAll();
 		System.out.println(queries);
 		return queries;
+}
+
+	@RequestMapping(value="/enquiries/{id}")
+	public @ResponseBody Enquiry allEnquiries(@PathVariable int id) {
+		Enquiry e = enquiryRepository.findOne(id);
+		System.out.println(e);
+		return e;
 	}
     
 	@RequestMapping(value="/queries/{id}")
@@ -60,13 +67,13 @@ public class FeedbackController {
 		return query;
 	}
 	
-	
+	/*
 	@RequestMapping("/enquiries/{id}")
 	public @ResponseBody Enquiry getEnquiry(@PathVariable Long id) {
 		Enquiry enq = enquiryRepository.findOne(id);
 		return enq;
 	}
-	
+	*/
 	
 	@RequestMapping(value="/addEnquiry", method=RequestMethod.GET)
 	public String getCreateForm(Model model) {
