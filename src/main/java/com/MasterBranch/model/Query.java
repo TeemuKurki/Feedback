@@ -11,19 +11,18 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Query")
 public class Query {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@NotNull
+	@Column(name = "enquiry_id")
 	private int enquiry_id;
 	
-	@NotNull
+	@Column(name = "question")
 	private String question;
 	
-	@NotNull
+	@Column(name = "questionType")
 	private int questionType; // 0 = default/string, 1 = checkbox/Options
 	
 	//private List<Option> options;
@@ -32,10 +31,8 @@ public class Query {
 	public Query() {
 	}
 	
-	public Query(long id, int enquiry_id, String question, int questionType) {
+	public Query(String question, int questionType) {
 		super();
-		this.id = id;
-		this.enquiry_id = enquiry_id;
 		this.question = question;
 		this.questionType = questionType;
 	}

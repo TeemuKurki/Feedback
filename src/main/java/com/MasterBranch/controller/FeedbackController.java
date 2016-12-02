@@ -20,31 +20,36 @@ import com.MasterBranch.repository.EnquiryRepository;
 import com.MasterBranch.repository.QueryRepository;
 @Controller
 public class FeedbackController {
-	
-	@Autowired
-	private EnquiryRepository enquiryRepository;
+
 	@Autowired
 	private QueryRepository queryRepository;
-	@Autowired
-	private AnswerRepository answerRepository;
+
 	
 	@RequestMapping(value="/")
 	public String index() {
 		return "index";
 	}
-
+	
+	@RequestMapping(value="/queries")
+	public @ResponseBody List<Query> allQueries() {
+		List<Query> queries = queryRepository.findAll();
+		System.out.println(queries);
+		return queries;
+	}
+    /*
 	@RequestMapping(value="/queries/{id}")
 	public @ResponseBody Query singleQuery(@PathVariable Long id) {
-		Query query = queryRepository.getOne(id);
+		Query query = queryRepository.findOne(id);
 		System.out.println(query);
 		return query;
 	}
 	
 	@RequestMapping("/enquiries/{id}")
-	public @ResponseBody List<Query> getAllQueries(@PathVariable Integer id) {
-		List<Query> queries = queryRepository.findById(id);
-		return queries;
+	public @ResponseBody String getAllQueries(@PathVariable Integer id) {
+		//List<Query> queries = queryRepository.findById(id);
+		return "";
 	}
+	*/
 	
 	@RequestMapping(value="/addEnquiry", method=RequestMethod.GET)
 	public String getCreateForm(Model model) {
@@ -52,7 +57,7 @@ public class FeedbackController {
 		model.addAttribute("enquiry", emptyEnquiry);
 		return "createForm";
 	}
-	
+	/*
 	@RequestMapping(value="/addEnquiry", method=RequestMethod.POST)
 	public String addEnquiry(@ModelAttribute(value="enquiry") Enquiry enquiry) {
 		enquiryRepository.save(enquiry);
@@ -63,7 +68,7 @@ public class FeedbackController {
 	public String editQueries(@PathVariable Integer id, Model model) {
 		Query query = new Query();
 		model.addAttribute("query", query);;
-		model.addAttribute("queries", queryRepository.findById(id));
+		//model.addAttribute("queries", queryRepository.findById(id));
 		model.addAttribute("enquiry", enquiryRepository.findOneById(id));
 		return "/enquiries/edit";
 	}
@@ -105,5 +110,5 @@ public class FeedbackController {
 		answerRepository.save(answer);
 		return "redirect:/enquiries/"+Integer.toString(enquiryId)+"/"+Integer.toString(queryDbId);
 	}
-	
+	*/
 }
