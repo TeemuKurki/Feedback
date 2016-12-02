@@ -60,14 +60,14 @@ public class FeedbackController {
 		System.out.println(e);
 		return e;
 	}
-    
+    /*
 	@RequestMapping(value="/queries/{id}")
 	public @ResponseBody Query singleQuery(@PathVariable int id) {
 		Query query = queryRepository.findOne(id);
 		return query;
 	}
 	
-	/*
+	/
 	@RequestMapping("/enquiries/{id}")
 	public @ResponseBody Enquiry getEnquiry(@PathVariable Long id) {
 		Enquiry enq = enquiryRepository.findOne(id);
