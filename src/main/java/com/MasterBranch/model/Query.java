@@ -11,24 +11,19 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name="Query")
 public class Query {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@Column(name = "enquiry_id")
 	private int enquiry_id;
-	
-	@Column(name = "question")
 	private String question;
-	
-	@Column(name = "questionType")
 	private int questionType; // 0 = default/string, 1 = checkbox/Options
 	
 	//private List<Option> options;
 	//private List<Answer> answer;
 	
-	public Query() {
+	protected Query() {
 	}
 	
 	public Query(String question, int questionType) {

@@ -1,15 +1,14 @@
 package com.MasterBranch.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="Enquiry")
 public class Enquiry {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,9 +19,6 @@ public class Enquiry {
 	
 	@Column(nullable = false)
 	private boolean isDeployed;
-	
-    @ElementCollection(targetClass=Integer.class)
-	private List<Query> queries;
 	
 	public Enquiry() {
 		super();
@@ -57,24 +53,10 @@ public class Enquiry {
 	public void setDeployed(boolean isDeployed) {
 		this.isDeployed = isDeployed;
 	}
-	
-	public void addQuery(Query q) {
-		if(queries != null) {
-			queries.add(q);
-		}
-	}
-
-	public List<Query> getQueries() {
-		return queries;
-	}
-
-	public void setQueries(List<Query> queries) {
-		this.queries = queries;
-	}
 
 	@Override
 	public String toString() {
-		return "Inquiry [id=" + id + ", name=" + name + ", isDeployed=" + isDeployed + ", queries=" + queries + "]";
+		return "Inquiry [id=" + id + ", name=" + name + ", isDeployed=" + isDeployed + "]";
 	}
 
 }
