@@ -22,8 +22,10 @@ public class Application {
 		return (args) -> {
 			// save students
 			Query q = new Query("Testi kysymys", 0); 
-			
+			Query q1 = new Query("Ääkköset", 0); 
+
 			repository.save(q);
+			repository.save(q1);
 
 		};
 	}
