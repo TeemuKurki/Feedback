@@ -26,16 +26,19 @@ public class FeedbackController {
 	@Autowired
 	private QueryRepository queryRepository;
 	
+	@Autowired
+	private EnquiryRepository enquiryRepository;
+	
 	@RequestMapping(value="/")
 	public String index() {
 		return "index";
 	}
 	
-	@RequestMapping(value="/queries")
-	public @ResponseBody List<Query> allQueries() {
-		List<Query> queries = queryRepository.findAll();
-		System.out.println(queries);
-		return queries;
+	@RequestMapping(value="/enquiries/{id}")
+	public @ResponseBody Enquiry allEnquiries(@PathVariable int id) {
+		Enquiry e = enquiryRepository.findOne(id);
+		System.out.println(e);
+		return e;
 	}
     /*
 	@RequestMapping(value="/queries/{id}")

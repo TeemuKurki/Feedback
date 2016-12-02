@@ -6,7 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import com.MasterBranch.model.Enquiry;
 import com.MasterBranch.model.Query;
+import com.MasterBranch.repository.EnquiryRepository;
 import com.MasterBranch.repository.QueryRepository;
 
 
@@ -18,14 +20,16 @@ public class Application {
 	}
 	
 	@Bean
-	public CommandLineRunner demo(QueryRepository repository) {
+	public CommandLineRunner demo(QueryRepository qrepository, EnquiryRepository erepository) {
 		return (args) -> {
 			// save students
-			Query q = new Query("Testi kysymys", 0); 
-			Query q1 = new Query("Ääkköset", 0); 
-
-			repository.save(q);
-			repository.save(q1);
+			Enquiry e = new Enquiry("Testi Kysely", false);
+			Query q = new Query(e,"Testi kysymys", 0); 
+			Query q1 = new Query(e,"Ääkköset", 0); 
+			
+			erepository.save(e);
+			qrepository.save(q);
+			qrepository.save(q1);
 
 		};
 	}
