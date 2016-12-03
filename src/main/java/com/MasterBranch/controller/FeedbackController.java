@@ -19,6 +19,7 @@ import com.MasterBranch.model.Enquiry;
 import com.MasterBranch.model.Query;
 import com.MasterBranch.repository.AnswerRepository;
 import com.MasterBranch.repository.EnquiryRepository;
+import com.MasterBranch.repository.OptionRepository;
 import com.MasterBranch.repository.QueryRepository;
 @Controller
 public class FeedbackController {
@@ -29,6 +30,8 @@ public class FeedbackController {
 	private EnquiryRepository enquiryRepository;
 	@Autowired
 	private AnswerRepository answerRepository;
+	@Autowired
+	private OptionRepository optionRepository;
 	
 	@RequestMapping("/")
 	public String index() {

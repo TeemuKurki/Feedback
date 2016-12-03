@@ -1,5 +1,8 @@
 package com.MasterBranch.model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -18,12 +21,18 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table(name = "Enquiry")
 public class Enquiry {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="enquiry_id")
 	private int id;
+	
 	private String name;
 	private boolean isDeployed;
 	
+    @OneToMany(targetEntity=Query.class,mappedBy="enquiry",cascade={CascadeType.ALL},orphanRemoval=true)
 	@JsonManagedReference
-	private Set<Query> queries;
+	private List<Query> queries = new ArrayList<Query>();
 	
 	public Enquiry() {
 	}
@@ -33,9 +42,6 @@ public class Enquiry {
 		this.isDeployed = false;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="enquiry_id")
 	public int getId() {
 		return id;
 	}
@@ -60,12 +66,11 @@ public class Enquiry {
 		this.isDeployed = isDeployed;
 	}
 	
-    @OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL,mappedBy="enquiry")
-	public Set<Query> getQueries() {
+	public List<Query> getQueries() {
 		return queries;
 	}
 	
-	public void setQueries(Set<Query> queries) {
+	public void setQueries(List<Query> queries) {
 		this.queries = queries;
 	}
 	

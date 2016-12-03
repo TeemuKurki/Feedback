@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.MasterBranch.model.Query;
 
-
 @Transactional
 public interface QueryRepository  extends JpaRepository<Query, Long> {
 	List<Query> findAll();

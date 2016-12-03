@@ -1,7 +1,11 @@
 package com.MasterBranch.model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,18 +16,30 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
+@Table(name = "Query")
 public class Query {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="query_id")
 	private int id;
+	
+	@ManyToOne(targetEntity=Enquiry.class)
+    @JoinColumn(name="enquiry_id")
+	@JsonBackReference
+	private Enquiry enquiry;
+	
 	private String question;
 	private int questionType;
-	private Enquiry enquiry;
+	
+	@OneToMany(targetEntity=Option.class,mappedBy="query",cascade={CascadeType.ALL},orphanRemoval=true)
+	@JsonManagedReference
+	private List<Option> options = new ArrayList<Option>();
 	
 	public Query() {
 	}
@@ -35,9 +51,6 @@ public class Query {
 		this.questionType = questionType;
 	}
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="query_id")
 	public int getId() {
 		return id;
 	}
@@ -62,15 +75,20 @@ public class Query {
 		this.question = question;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="enquiry_id")
-	@JsonBackReference
 	public Enquiry getEnquiry() {
 		return this.enquiry;
 	}
 	
 	public void setEnquiry(Enquiry enquiry) {
 		this.enquiry = enquiry;
+	}
+	
+	public List<Option> getOptions() {
+		return options;
+	}
+	
+	public void setOptions(List<Option> options) {
+		this.options = options;
 	}
 
 }
