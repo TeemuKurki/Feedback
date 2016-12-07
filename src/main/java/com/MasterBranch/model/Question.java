@@ -21,12 +21,12 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name = "Query")
-public class Query {
+@Table(name = "Question")
+public class Question {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="query_id")
+    @Column(name="question_id")
 	private int id;
 	
 	@ManyToOne(targetEntity=Enquiry.class)
@@ -37,14 +37,14 @@ public class Query {
 	private String question;
 	private int questionType;
 	
-	@OneToMany(targetEntity=Option.class,mappedBy="query",cascade={CascadeType.ALL},orphanRemoval=true)
+	@OneToMany(targetEntity=Option.class,mappedBy="question",cascade={CascadeType.ALL},orphanRemoval=true)
 	@JsonManagedReference
 	private List<Option> options = new ArrayList<Option>();
 	
-	public Query() {
+	public Question() {
 	}
 	
-	public Query(Enquiry enquiry, String question, int questionType) {
+	public Question(Enquiry enquiry, String question, int questionType) {
 		super();
 		this.enquiry = enquiry;
 		this.question = question;

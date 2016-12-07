@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import com.MasterBranch.model.Enquiry;
-import com.MasterBranch.model.Query;
+import com.MasterBranch.model.Question;
 import com.MasterBranch.model.Option;
 import com.MasterBranch.repository.EnquiryRepository;
 import com.MasterBranch.repository.OptionRepository;
@@ -53,8 +53,8 @@ public class Application {
 	        */
 	        
 	        Enquiry e = new Enquiry("Harjoitus kysely", false);
-	        Query q1 = new Query(e, "Monivalinta Kysymys", 1);
-	        Query q2 = new Query(e, "Tavallinen Kysymys", 0);
+	        Question q1 = new Question(e, "Monivalinta Kysymys", 1);
+	        Question q2 = new Question(e, "Tavallinen Kysymys", 0);
 	        Option o1 = new Option(q1, "Eka valinta");
 	        Option o2 = new Option(q1, "Toka valinta");
 	        

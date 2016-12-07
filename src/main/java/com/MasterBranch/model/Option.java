@@ -23,10 +23,10 @@ public class Option {
     @Column(name="option_id")
 	private int id;
 	
-	@ManyToOne(targetEntity=Query.class)
+	@ManyToOne(targetEntity=Question.class)
     @JoinColumn(name="query_id")
 	@JsonBackReference
-	private Query query;
+	private Question question;
 	
 	private String optionValue;
 
@@ -37,8 +37,8 @@ public class Option {
 		this.optionValue = optionValue;
 	}
 	
-	public Option(Query query, String optionValue) {
-		this.query = query;
+	public Option(Question question, String optionValue) {
+		this.question = question;
 		this.optionValue = optionValue;
 	}
 
@@ -58,11 +58,11 @@ public class Option {
 		this.optionValue = optionValue;
 	}
 	
-	public Query getQuery() {
-		return this.query;
+	public Question getQuestion() {
+		return this.question;
 	}
 	
-	public void setQuery(Query query) {
-		this.query = query;
+	public void setQuestion(Question question) {
+		this.question = question;
 	}
 }

@@ -30,9 +30,9 @@ public class Enquiry {
 	private String name;
 	private boolean isDeployed;
 	
-    @OneToMany(targetEntity=Query.class,mappedBy="enquiry",cascade={CascadeType.ALL},orphanRemoval=true)
+    @OneToMany(targetEntity=Question.class,mappedBy="enquiry",cascade={CascadeType.ALL},orphanRemoval=true)
 	@JsonManagedReference
-	private List<Query> queries = new ArrayList<Query>();
+	private List<Question> queries = new ArrayList<Question>();
 	
 	public Enquiry() {
 	}
@@ -66,11 +66,11 @@ public class Enquiry {
 		this.isDeployed = isDeployed;
 	}
 	
-	public List<Query> getQueries() {
+	public List<Question> getQueries() {
 		return queries;
 	}
 	
-	public void setQueries(List<Query> queries) {
+	public void setQueries(List<Question> queries) {
 		this.queries = queries;
 	}
 	

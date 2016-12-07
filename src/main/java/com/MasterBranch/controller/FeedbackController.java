@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.MasterBranch.model.Answer;
 import com.MasterBranch.model.Enquiry;
-import com.MasterBranch.model.Query;
+import com.MasterBranch.model.Question;
 import com.MasterBranch.repository.AnswerRepository;
 import com.MasterBranch.repository.EnquiryRepository;
 import com.MasterBranch.repository.OptionRepository;
@@ -51,32 +51,24 @@ public class FeedbackController {
 	}
 	
 	@RequestMapping("/queries")
-	public @ResponseBody List<Query> allQueries() {
-		List<Query> queries = queryRepository.findAll();
-		System.out.println(queries);
+	public @ResponseBody List<Question> allQueries() {
+		List<Question> queries = queryRepository.findAll();
 		return queries;
-}
-
-	@RequestMapping(value="/enquiries/{id}")
-	public @ResponseBody Enquiry allEnquiries(@PathVariable int id) {
-		Enquiry e = enquiryRepository.findOne(id);
-		System.out.println(e);
-		return e;
 	}
-    /*
+
 	@RequestMapping(value="/queries/{id}")
-	public @ResponseBody Query singleQuery(@PathVariable int id) {
-		Query query = queryRepository.findOne(id);
+	public @ResponseBody Question singleQuery(@PathVariable int id) {
+		Question query = queryRepository.findOne(id);
 		return query;
 	}
 	
-	/
+	
 	@RequestMapping("/enquiries/{id}")
-	public @ResponseBody Enquiry getEnquiry(@PathVariable Long id) {
+	public @ResponseBody Enquiry getEnquiry(@PathVariable int id) {
 		Enquiry enq = enquiryRepository.findOne(id);
 		return enq;
 	}
-	*/
+	
 	
 	@RequestMapping(value="/addEnquiry", method=RequestMethod.GET)
 	public String getCreateForm(Model model) {
