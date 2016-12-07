@@ -7,6 +7,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.data.repository.config.RepositoryConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,8 @@ import com.MasterBranch.repository.AnswerRepository;
 import com.MasterBranch.repository.EnquiryRepository;
 import com.MasterBranch.repository.OptionRepository;
 import com.MasterBranch.repository.QuestionRepository;
+
+@CrossOrigin
 @Controller
 public class FeedbackController {
 

@@ -22,7 +22,7 @@ public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-	
+	/*
 	@Bean
 	public CommandLineRunner demo(QuestionRepository qrepository, EnquiryRepository erepository, OptionRepository orepository) {
 		return (args) -> {
@@ -50,7 +50,7 @@ public class Application {
 	        erepository.save(new HashSet<Enquiry>() {{
 	            add(enquiry);
 	        }});
-	        */
+	        
 	        
 	        Enquiry e = new Enquiry("Harjoitus kysely", false);
 	        Question q1 = new Question(e, "Monivalinta Kysymys", 1);
@@ -66,5 +66,7 @@ public class Application {
 
 
 		};
+		
 	}
+	*/
 }
