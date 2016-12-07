@@ -31,6 +31,11 @@ public class FeedbackController {
 		return "index";
 	}
 	
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
+	}
+	
 	@RequestMapping("/queries")
 	public @ResponseBody List<Query> allQueries() {
 		List<Query> queries = queryRepository.findAll();

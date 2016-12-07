@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>FBEnd Boot System</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+ 
+</head>
+<body>
+	<h1>FBEnd Boot System v. 0.0.6a</h1>
+    <table class="table table-striped">
+		<tr>
+		    <th>Name</th>
+		</tr>  
+    	<tr th:each = "enquiry : ${enquiries}">
+    		<td th:text="${enquiry.name}"></td>
+    		<td><a th:href="@{/delete/{id}(id=${enquiry.id})}" class="btn btn-danger">Delete</a></td>
+    	</tr>
+    </table>
+    <a href="/add" class="btn btn-success">Add Enquiry</a>
+    
+    <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+    </form>
+    
+</body>
+</html>
