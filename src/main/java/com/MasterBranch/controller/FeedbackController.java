@@ -103,20 +103,22 @@ public class FeedbackController {
 		enquiryRepository.save(enquiry);
 		return "redirect:/enquiries";
 	}
-	/*
-	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.GET)
-	public String editQueries(@PathVariable Integer id, Model model) {
-		Question question = new Query();
-		model.addAttribute("query", query);;
-		//model.addAttribute("queries", queryRepository.findById(id));
-		model.addAttribute("enquiry", enquiryRepository.findOne(id));
-		return "/enquiries/edit";
+	
+	@RequestMapping(value="/enquiries/{enquiryId}/edit", method=RequestMethod.GET)
+	public String editQueries(@PathVariable Integer enquiryId, Model model) {
+		Question question = new Question();
+		model.addAttribute("Question", question);
+		return "addQuestion";
 	}
 	
-	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.POST)
-	public String saveQuery(@PathVariable Integer id, @ModelAttribute(value="query") Query query) {
-		queryRepository.save(query);
-		return "redirect:/enquiries/" + Integer.toString(id) + "/edit";
+	//Ei kannata laitataa attribuutin nimeksi pelkästään id koska spring boot sattaa tehdä silloin hämmentäviä juttuja
+	
+	@RequestMapping(value="/enquiries/{enquiryId}/edit", method=RequestMethod.POST)
+	public String saveQuery(@PathVariable Integer enquiryId, @ModelAttribute(value="Question") Question question) {
+		Enquiry e = enquiryRepository.findOne(enquiryId);
+		question.setEnquiry(e);
+		questionRepository.save(question);
+		return "redirect:/enquiries/" + Integer.toString(enquiryId);
 	}
 	/*
 	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.DELETE)
@@ -136,19 +138,19 @@ public class FeedbackController {
 		List<Enquiry> enquiries = enquiryRepository.findAll();
 		return enquiries;
 	}
-	
-	@RequestMapping(value="/enquiries/{enquiryId}/{queryId}", method=RequestMethod.GET)
-	public String addEmptyAnswer(@PathVariable Integer enquiryId, @PathVariable Integer queryId, Model model) {
-		model.addAttribute("answers", answerRepository.findById(queryId));
-		Answer answer = new Answer();
-		model.addAttribute("answer", answer);
-		return "answerForm";
-	}
-	
-	@RequestMapping(value="/enquiries/{enquiryId}/{queryDbId}", method=RequestMethod.POST)
-	public String addAnswer(@PathVariable Integer enquiryId, @PathVariable Integer queryDbId, @ModelAttribute(value="answer") Answer answer) {
-		answerRepository.save(answer);
-		return "redirect:/enquiries/"+Integer.toString(enquiryId)+"/"+Integer.toString(queryDbId);
-	}
 	*/
+	@RequestMapping(value="/enquiries/{enquiryId}/{questionId}/edit", method=RequestMethod.GET)
+	public String addEmptyAnswer(@PathVariable Integer enquiryId, @PathVariable Integer questionId, Model model) {
+		Answer answer = new Answer();
+		model.addAttribute("Answer", answer);
+		return "addAnswer";
+	}
+	
+	@RequestMapping(value="/enquiries/{enquiryId}/{queryDbId}/edit", method=RequestMethod.POST)
+	public String addAnswer(@PathVariable Integer enquiryId, @PathVariable Integer queryDbId, @ModelAttribute(value="Answer") Answer answer) {
+		System.out.println("testii");
+		answerRepository.save(answer);
+		return "redirect:/enquiries/"+Integer.toString(enquiryId);
+	}
+	
 }
