@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.MasterBranch.model.Question;
 
 @Transactional
-public interface QueryRepository  extends JpaRepository<Question, Integer> {
+public interface QuestionRepository  extends JpaRepository<Question, Integer> {
 	List<Question> findAll();
 }

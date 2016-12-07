@@ -13,7 +13,7 @@ import com.MasterBranch.model.Question;
 import com.MasterBranch.model.Option;
 import com.MasterBranch.repository.EnquiryRepository;
 import com.MasterBranch.repository.OptionRepository;
-import com.MasterBranch.repository.QueryRepository;
+import com.MasterBranch.repository.QuestionRepository;
 
 
 @SpringBootApplication
@@ -24,7 +24,7 @@ public class Application {
 	}
 	
 	@Bean
-	public CommandLineRunner demo(QueryRepository qrepository, EnquiryRepository erepository, OptionRepository orepository) {
+	public CommandLineRunner demo(QuestionRepository qrepository, EnquiryRepository erepository, OptionRepository orepository) {
 		return (args) -> {
 			/*
 			Enquiry enquiry = new Enquiry("Testi Kysely", false);

@@ -20,12 +20,12 @@ import com.MasterBranch.model.Question;
 import com.MasterBranch.repository.AnswerRepository;
 import com.MasterBranch.repository.EnquiryRepository;
 import com.MasterBranch.repository.OptionRepository;
-import com.MasterBranch.repository.QueryRepository;
+import com.MasterBranch.repository.QuestionRepository;
 @Controller
 public class FeedbackController {
 
 	@Autowired
-	private QueryRepository queryRepository;
+	private QuestionRepository questionRepository;
 	@Autowired
 	private EnquiryRepository enquiryRepository;
 	@Autowired
@@ -50,25 +50,43 @@ public class FeedbackController {
 		return enquiries;
 	}
 	
-	@RequestMapping("/queries")
-	public @ResponseBody List<Question> allQueries() {
-		List<Question> queries = queryRepository.findAll();
-		return queries;
+	@RequestMapping("/questions")
+	public @ResponseBody List<Question> allQuestions() {
+		List<Question> questions = questionRepository.findAll();
+		return questions;
+	}
+	
+	@RequestMapping("/question/delete")
+	public @ResponseBody List<Question> deleteQuestion() {
+		List<Question> questions = questionRepository.findAll();
+		return questions;
 	}
 
-	@RequestMapping(value="/queries/{id}")
-	public @ResponseBody Question singleQuery(@PathVariable int id) {
-		Question query = queryRepository.findOne(id);
-		return query;
+	@RequestMapping(value="/questions/{id}")
+	public @ResponseBody Question singlequestion(@PathVariable int id) {
+		Question question = questionRepository.findOne(id);
+		return question;
 	}
-	
-	
+		
 	@RequestMapping("/enquiries/{id}")
 	public @ResponseBody Enquiry getEnquiry(@PathVariable int id) {
 		Enquiry enq = enquiryRepository.findOne(id);
 		return enq;
 	}
 	
+	@RequestMapping(value="/questions/{id}/delete")
+	public @ResponseBody List<Question> deleteQuestion(@PathVariable int id) {
+		Question question = questionRepository.findOne(id);
+		questionRepository.delete(question);
+		return allQuestions();
+	}
+	
+	@RequestMapping(value="/enquiries/{id}/delete")
+	public @ResponseBody List<Enquiry> deleteEnquiry(@PathVariable int id) {
+		Enquiry e = enquiryRepository.findOne(id);
+		enquiryRepository.delete(e);
+		return allEnquiries();
+	}
 	
 	@RequestMapping(value="/addEnquiry", method=RequestMethod.GET)
 	public String getCreateForm(Model model) {
@@ -85,10 +103,10 @@ public class FeedbackController {
 	/*
 	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.GET)
 	public String editQueries(@PathVariable Integer id, Model model) {
-		Query query = new Query();
+		Question question = new Query();
 		model.addAttribute("query", query);;
 		//model.addAttribute("queries", queryRepository.findById(id));
-		model.addAttribute("enquiry", enquiryRepository.findOneById(id));
+		model.addAttribute("enquiry", enquiryRepository.findOne(id));
 		return "/enquiries/edit";
 	}
 	
@@ -97,7 +115,7 @@ public class FeedbackController {
 		queryRepository.save(query);
 		return "redirect:/enquiries/" + Integer.toString(id) + "/edit";
 	}
-	
+	/*
 	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.DELETE)
 	public String deleteQuery(@PathVariable Integer id, @ModelAttribute(value="query") Query query) {
 		queryRepository.save(query);
