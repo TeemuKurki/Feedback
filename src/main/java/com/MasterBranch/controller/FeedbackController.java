@@ -53,6 +53,11 @@ public class FeedbackController {
 	@RequestMapping("/queries")
 	public @ResponseBody List<Query> allQueries() {
 		List<Query> queries = queryRepository.findAll();
+		return queries;
+}
+	@RequestMapping("/queries/delete")
+	public @ResponseBody List<Query> deleteQueries() {
+		List<Query> queries = queryRepository.findAll();
 		System.out.println(queries);
 		return queries;
 }
@@ -63,20 +68,26 @@ public class FeedbackController {
 		System.out.println(e);
 		return e;
 	}
-    /*
+    
 	@RequestMapping(value="/queries/{id}")
 	public @ResponseBody Query singleQuery(@PathVariable int id) {
 		Query query = queryRepository.findOne(id);
 		return query;
 	}
 	
-	/
-	@RequestMapping("/enquiries/{id}")
-	public @ResponseBody Enquiry getEnquiry(@PathVariable Long id) {
-		Enquiry enq = enquiryRepository.findOne(id);
-		return enq;
+	@RequestMapping(value="/queries/{id}/delete")
+	public @ResponseBody List<Query> deleteQuery(@PathVariable int id) {
+		Query query = queryRepository.findOne(id);
+		queryRepository.delete(query);
+		return allQueries();
 	}
-	*/
+	
+	@RequestMapping(value="/enquiries/{id}/delete")
+	public @ResponseBody List<Enquiry> deleteEnquiry(@PathVariable int id) {
+		Enquiry e = enquiryRepository.findOne(id);
+		enquiryRepository.delete(e);
+		return allEnquiries();
+	}
 	
 	@RequestMapping(value="/addEnquiry", method=RequestMethod.GET)
 	public String getCreateForm(Model model) {
@@ -96,7 +107,7 @@ public class FeedbackController {
 		Query query = new Query();
 		model.addAttribute("query", query);;
 		//model.addAttribute("queries", queryRepository.findById(id));
-		model.addAttribute("enquiry", enquiryRepository.findOneById(id));
+		model.addAttribute("enquiry", enquiryRepository.findOne(id));
 		return "/enquiries/edit";
 	}
 	
@@ -105,7 +116,7 @@ public class FeedbackController {
 		queryRepository.save(query);
 		return "redirect:/enquiries/" + Integer.toString(id) + "/edit";
 	}
-	
+	/*
 	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.DELETE)
 	public String deleteQuery(@PathVariable Integer id, @ModelAttribute(value="query") Query query) {
 		queryRepository.save(query);
