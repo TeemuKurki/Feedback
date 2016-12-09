@@ -37,15 +37,14 @@ public class FeedbackController {
 		return "index";
 	}
 	
+	@RequestMapping("/{question_id}/answers")
+	public @ResponseBody List<Answer> allAnswers(@PathVariable int question_id) {
+		List<Answer> answers = answerRepository.findByQuestionId(question_id);
+		return answers;
+	}
 	@RequestMapping("/login")
 	public String login() {
 		return "login";
-	}
-
-	@RequestMapping("/answers")
-	public @ResponseBody List<Answer> allAnswers() {
-		List<Answer> answers = answerRepository.findAll();
-		return answers;
 	}
 	
 	@RequestMapping("/enquiries")
@@ -143,14 +142,13 @@ public class FeedbackController {
 	@RequestMapping(value="/enquiries/{enquiryId}/{questionId}/edit", method=RequestMethod.GET)
 	public String addEmptyAnswer(@PathVariable Integer enquiryId, @PathVariable Integer questionId, Model model) {
 		Answer answer = new Answer();
-		answer.setQuestion_id(questionId);
 		model.addAttribute("Answer", answer);
 		return "addAnswer";
 	}
 	
-	@RequestMapping(value="/enquiries/{enquiryId}/{queryDbId}/edit", method=RequestMethod.POST)
-	public String addAnswer(@PathVariable Integer enquiryId, @PathVariable Integer queryDbId, @ModelAttribute(value="Answer") Answer answer) {
-		System.out.println("testii");
+	@RequestMapping(value="/enquiries/{enquiryId}/{questionId}/edit", method=RequestMethod.POST)
+	public String addAnswer(@PathVariable Integer enquiryId, @PathVariable Integer questionId, @ModelAttribute(value="Answer") Answer answer) {
+		answer.setQuestionId(questionId);
 		answerRepository.save(answer);
 		return "redirect:/enquiries/"+Integer.toString(enquiryId);
 	}

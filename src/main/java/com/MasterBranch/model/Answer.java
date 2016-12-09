@@ -17,7 +17,7 @@ public class Answer {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="answer_id")
 	private int id;
-	private int question_id;
+	private int questionId;
 
     @NotNull
 	private String answer;
@@ -45,12 +45,12 @@ public class Answer {
 		this.id = id;
 	}
 
-	public int getQuestion_id() {
-		return question_id;
+	public int getQuestionId() {
+		return questionId;
 	}
 
-	public void setQuestion_id(int question_id) {
-		this.question_id = question_id;
+	public void setQuestionId(int question_id) {
+		this.questionId = question_id;
 	}
 
 	@Override
