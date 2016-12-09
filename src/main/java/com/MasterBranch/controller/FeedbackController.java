@@ -3,9 +3,6 @@ package com.MasterBranch.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.data.repository.config.RepositoryConfiguration;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.MasterBranch.model.Answer;
 import com.MasterBranch.model.Enquiry;
 import com.MasterBranch.model.Question;
@@ -46,6 +41,10 @@ public class FeedbackController {
 	public @ResponseBody List<Answer> allAnswers(@PathVariable int question_id) {
 		List<Answer> answers = answerRepository.findByQuestionId(question_id);
 		return answers;
+	}
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
 	}
 	
 	@RequestMapping("/enquiries")
