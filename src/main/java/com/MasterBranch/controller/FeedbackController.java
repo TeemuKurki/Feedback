@@ -142,6 +142,7 @@ public class FeedbackController {
 	@RequestMapping(value="/enquiries/{enquiryId}/{questionId}/edit", method=RequestMethod.GET)
 	public String addEmptyAnswer(@PathVariable Integer enquiryId, @PathVariable Integer questionId, Model model) {
 		Answer answer = new Answer();
+		answer.setQuestion_id(questionId);
 		model.addAttribute("Answer", answer);
 		return "addAnswer";
 	}
