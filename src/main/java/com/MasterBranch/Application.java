@@ -24,7 +24,7 @@ public class Application extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-	/*
+	
 	@Bean
 	public CommandLineRunner demo(QuestionRepository qrepository, EnquiryRepository erepository, OptionRepository orepository) {
 		return (args) -> {
@@ -47,5 +47,5 @@ public class Application extends SpringBootServletInitializer {
 		};
 		
 	}
-	*/
+	
 }

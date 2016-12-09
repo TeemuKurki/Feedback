@@ -37,7 +37,7 @@ public class FeedbackController {
 		return "index";
 	}
 	
-	@RequestMapping("/{question_id}/answers")
+	@RequestMapping("/answers/{question_id}")
 	public @ResponseBody List<Answer> allAnswers(@PathVariable int question_id) {
 		List<Answer> answers = answerRepository.findByQuestionId(question_id);
 		return answers;
