@@ -1,28 +1,44 @@
 package com.MasterBranch.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
+@Table(name = "Option")
 public class Option {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+    @Column(name="option_id")
+	private int id;
 	
-	@NotNull
+	@ManyToOne(targetEntity=Question.class)
+    @JoinColumn(name="query_id")
+	@JsonBackReference
+	private Question question;
+	
 	private String optionValue;
-	
 
-	protected Option() {
-
+	public Option() {
 	}
 	
-	public Option(int id, String optionValue, String type) {
-		this.id = id;
+	public Option(String optionValue) {
+		this.optionValue = optionValue;
+	}
+	
+	public Option(Question question, String optionValue) {
+		this.question = question;
 		this.optionValue = optionValue;
 	}
 
@@ -40,5 +56,13 @@ public class Option {
 
 	public void setOptionValue(String optionValue) {
 		this.optionValue = optionValue;
+	}
+	
+	public Question getQuestion() {
+		return this.question;
+	}
+	
+	public void setQuestion(Question question) {
+		this.question = question;
 	}
 }

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="charset=UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1>Form</h1>
+    <form th:action="@{edit}" th:object="${Answer}" method="post">
+        <p>Vastaus: <input type="text" th:field="*{answer}" /></p>
+        <p><input type="submit" value="Submit" /></p>
+    </form>
+
+</body>
+</html>
