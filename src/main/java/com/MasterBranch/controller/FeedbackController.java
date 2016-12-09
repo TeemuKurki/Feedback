@@ -43,7 +43,8 @@ public class FeedbackController {
 	
 	@RequestMapping("/answers")
 	public @ResponseBody List<Answer> allAnswers() {
-		List<Answer> answers = answerRepository.findAll();
+		int	question_id = 1;
+		List<Answer> answers = answerRepository.findByquestion_id(question_id);
 		return answers;
 	}
 	
