@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.data.repository.config.RepositoryConfiguration;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -41,10 +42,9 @@ public class FeedbackController {
 		return "index";
 	}
 	
-	@RequestMapping("/answers")
-	public @ResponseBody List<Answer> allAnswers() {
-		int	question_id = 1;
-		List<Answer> answers = answerRepository.findByquestion_id(question_id);
+	@RequestMapping("/{question_id}/answers")
+	public @ResponseBody List<Answer> allAnswers(@PathVariable int question_id) {
+		List<Answer> answers = answerRepository.findByQuestionId(question_id);
 		return answers;
 	}
 	
@@ -143,14 +143,13 @@ public class FeedbackController {
 	@RequestMapping(value="/enquiries/{enquiryId}/{questionId}/edit", method=RequestMethod.GET)
 	public String addEmptyAnswer(@PathVariable Integer enquiryId, @PathVariable Integer questionId, Model model) {
 		Answer answer = new Answer();
-		answer.setQuestion_id(questionId);
 		model.addAttribute("Answer", answer);
 		return "addAnswer";
 	}
 	
-	@RequestMapping(value="/enquiries/{enquiryId}/{queryDbId}/edit", method=RequestMethod.POST)
-	public String addAnswer(@PathVariable Integer enquiryId, @PathVariable Integer queryDbId, @ModelAttribute(value="Answer") Answer answer) {
-		System.out.println("testii");
+	@RequestMapping(value="/enquiries/{enquiryId}/{questionId}/edit", method=RequestMethod.POST)
+	public String addAnswer(@PathVariable Integer enquiryId, @PathVariable Integer questionId, @ModelAttribute(value="Answer") Answer answer) {
+		answer.setQuestionId(questionId);
 		answerRepository.save(answer);
 		return "redirect:/enquiries/"+Integer.toString(enquiryId);
 	}
