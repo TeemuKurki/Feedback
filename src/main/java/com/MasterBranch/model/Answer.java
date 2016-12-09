@@ -17,6 +17,7 @@ public class Answer {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="answer_id")
 	private int id;
+	private int question_id;
 
     @NotNull
 	private String answer;
@@ -36,12 +37,20 @@ public class Answer {
 		this.answer = answer;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getQuestion_id() {
+		return question_id;
+	}
+
+	public void setQuestion_id(int question_id) {
+		this.question_id = question_id;
 	}
 
 	@Override
