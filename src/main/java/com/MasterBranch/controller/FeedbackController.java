@@ -8,9 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.MasterBranch.model.Answer;
 import com.MasterBranch.model.Enquiry;
 import com.MasterBranch.model.Question;
@@ -98,11 +101,23 @@ public class FeedbackController {
 		return "addEnquiry";
 	}
 	
+	/*
 	@RequestMapping(value="/addEnquiry", method=RequestMethod.POST)
 	public String addEnquiry(@ModelAttribute(value="enquiry") Enquiry enquiry) {
 		enquiryRepository.save(enquiry);
 		return "redirect:/enquiries";
 	}
+	*/
+	
+	@RequestMapping(value="/addEnquiry", method=RequestMethod.POST)
+	public String addEnquiry(@RequestBody Enquiry enquiry) {
+		enquiryRepository.save(enquiry);
+		return "redirect:/enquiries";
+	}
+	
+	
+	
+	
 	
 	@RequestMapping(value="/enquiries/{enquiryId}/edit", method=RequestMethod.GET)
 	public String editQueries(@PathVariable Integer enquiryId, Model model) {
@@ -112,7 +127,7 @@ public class FeedbackController {
 	}
 	
 	//Ei kannata laitataa attribuutin nimeksi pelkästään id koska spring boot sattaa tehdä silloin hämmentäviä juttuja
-	
+	/*
 	@RequestMapping(value="/enquiries/{enquiryId}/edit", method=RequestMethod.POST)
 	public String saveQuery(@PathVariable Integer enquiryId, @ModelAttribute(value="Question") Question question) {
 		Enquiry e = enquiryRepository.findOne(enquiryId);
@@ -120,6 +135,19 @@ public class FeedbackController {
 		questionRepository.save(question);
 		return "redirect:/enquiries/" + Integer.toString(enquiryId);
 	}
+	*/
+	
+	@RequestMapping(value="/enquiries/{enquiryId}/edit", method=RequestMethod.POST)
+	public String saveQuery(@PathVariable Integer enquiryId, @RequestBody Question question) {
+		Enquiry e = enquiryRepository.findOne(enquiryId);
+		question.setEnquiry(e);
+		questionRepository.save(question);
+		return "redirect:/enquiries/" + Integer.toString(enquiryId);
+	}
+	
+	
+	
+	
 	/*
 	@RequestMapping(value="/enquiries/{id}/edit", method=RequestMethod.DELETE)
 	public String deleteQuery(@PathVariable Integer id, @ModelAttribute(value="query") Query query) {
@@ -145,9 +173,17 @@ public class FeedbackController {
 		model.addAttribute("Answer", answer);
 		return "addAnswer";
 	}
-	
+	/*
 	@RequestMapping(value="/enquiries/{enquiryId}/{questionId}/edit", method=RequestMethod.POST)
 	public String addAnswer(@PathVariable Integer enquiryId, @PathVariable Integer questionId, @ModelAttribute(value="Answer") Answer answer) {
+		answer.setQuestionId(questionId);
+		answerRepository.save(answer);
+		return "redirect:/enquiries/"+Integer.toString(enquiryId);
+	}
+	*/
+	
+	@RequestMapping(value="/enquiries/{enquiryId}/{questionId}/edit", method=RequestMethod.POST)
+	public String addAnswer(@PathVariable Integer enquiryId, @PathVariable Integer questionId, @RequestBody Answer answer) {
 		answer.setQuestionId(questionId);
 		answerRepository.save(answer);
 		return "redirect:/enquiries/"+Integer.toString(enquiryId);
