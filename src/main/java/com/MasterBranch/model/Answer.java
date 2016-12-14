@@ -19,7 +19,8 @@ public class Answer {
 	private int questionId;
 	private String answer;
 
-	private int radioButton = 0;
+	private int optionId;
+	
 	
 	public Answer() {
 	}
@@ -57,12 +58,12 @@ public class Answer {
 		return "Answer [answer=" + answer + ", id=" + id + "]";
 	}
 
-	public int getRadioButton() {
-		return radioButton;
+	public int getOptionId() {
+		return optionId;
 	}
 
-	public void setRadioButton(int radioButton) {
-		this.radioButton = radioButton;
+	public void setOptionId(int optionId) {
+		this.optionId = optionId;
 	}
 	
 }

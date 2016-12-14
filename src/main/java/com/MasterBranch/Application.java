@@ -23,14 +23,23 @@ public class Application {
 	@Bean
 	public CommandLineRunner demo(QuestionRepository qrepository, EnquiryRepository erepository, OptionRepository orepository) {
 		return (args) -> {
-	        
-	        Enquiry e = new Enquiry("Harjoitus kysely", true);
-	        Question q1 = new Question(e, "Monivalinta Kysymys", 1);
-	        Question q2 = new Question(e, "Tavallinen Kysymys", 0);
+			/*
+			Enquiry e1 = new Enquiry("Testikysely", true);
+			Question q1 = new Question(e1, "Osasitko koodata sujuvasti ennen kuin siirryit Digiprojekti-kurssille?", 1);
+			Option o1 = new Option(q1, "Osasin koodata sujuvasti");
+			Option o2 = new Option(q1, "");
+			Option o3 = new Option(q1, "");
+			Option o4 = new Option(q1, "");
+			*/
+
+			
+	        Enquiry e1 = new Enquiry("Harjoitus kysely", true);
+	        Question q1 = new Question(e1, "Monivalinta Kysymys", 1);
+	        Question q2 = new Question(e1, "Tavallinen Kysymys", 0);
 	        Option o1 = new Option(q1, "Eka valinta");
 	        Option o2 = new Option(q1, "Toka valinta");
 	        
-	        erepository.save(e);
+	        erepository.save(e1);
 	        qrepository.save(q1);
 	        qrepository.save(q2);
 	        orepository.save(o1);
