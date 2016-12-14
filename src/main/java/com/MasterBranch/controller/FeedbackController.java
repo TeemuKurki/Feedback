@@ -139,7 +139,8 @@ public class FeedbackController {
 	
 	@RequestMapping(value="/enquiries/{enquiryId}/{questionId}/edit", method=RequestMethod.POST)
 	public String addAnswer(@PathVariable Integer enquiryId, @PathVariable Integer questionId, @ModelAttribute(value="Answer") Answer answer) {
-		answer.setQuestionId(questionId);
+		Question question = questionRepository.findOne(questionId);
+		answer.setQuestion(question);
 		answerRepository.save(answer);
 		return "redirect:/enquiries/"+Integer.toString(enquiryId);
 	}

@@ -1,14 +1,11 @@
 package com.MasterBranch.model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,6 +37,10 @@ public class Question {
 	@OneToMany(targetEntity=Option.class,mappedBy="question",cascade={CascadeType.ALL},orphanRemoval=true)
 	@JsonManagedReference
 	private List<Option> options = new ArrayList<Option>();
+	
+	@OneToMany(targetEntity=Option.class, mappedBy="question", cascade={CascadeType.ALL},orphanRemoval=true)
+	@JsonManagedReference
+	private List<Answer> answers = new ArrayList<Answer>();
 	
 	public Question() {
 	}
@@ -89,6 +90,14 @@ public class Question {
 	
 	public void setOptions(List<Option> options) {
 		this.options = options;
+	}
+	
+	public List<Answer> getAnswers() {
+		return answers;
+	}
+	
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
 	}
 
 }
