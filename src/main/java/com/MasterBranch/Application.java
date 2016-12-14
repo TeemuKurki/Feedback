@@ -25,7 +25,7 @@ public class Application extends SpringBootServletInitializer {
 	public CommandLineRunner demo(QuestionRepository qrepository, EnquiryRepository erepository, OptionRepository orepository) {
 		return (args) -> {
 			
-			Enquiry e1 = new Enquiry("Testikysely", true);
+			Enquiry e1 = new Enquiry("Testikysely ", true);
 			Question q1 = new Question(e1, "Osasitko koodata sujuvasti ennen kuin siirryit Digiprojekti-kurssille?", 1);
 			Option o1 = new Option(q1, "Osasin koodata sujuvasti");
 			Option o2 = new Option(q1, "");
