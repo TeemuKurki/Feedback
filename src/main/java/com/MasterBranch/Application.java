@@ -1,14 +1,9 @@
 package com.MasterBranch;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.MasterBranch.model.Enquiry;
 import com.MasterBranch.model.Question;
@@ -19,17 +14,15 @@ import com.MasterBranch.repository.QuestionRepository;
 
 
 @SpringBootApplication
-public class Application extends SpringBootServletInitializer {
+public class Application {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-	
+
 	@Bean
 	public CommandLineRunner demo(QuestionRepository qrepository, EnquiryRepository erepository, OptionRepository orepository) {
 		return (args) -> {
-			
-	        
 	        
 	        Enquiry e = new Enquiry("Harjoitus kysely", true);
 	        Question q1 = new Question(e, "Monivalinta Kysymys", 1);
@@ -45,7 +38,5 @@ public class Application extends SpringBootServletInitializer {
 
 
 		};
-		
 	}
-	
 }
