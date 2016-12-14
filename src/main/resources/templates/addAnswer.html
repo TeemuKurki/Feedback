@@ -8,7 +8,7 @@
 
 <h1>Form</h1>
     <form th:action="@{edit}" th:object="${Answer}" method="post">
-        <p>Vastaus: <input type="text" th:field="*{answer}" /></p>
+    <input type="radio" value="1" th:field="*{radioButton}" />
         <p><input type="submit" value="Submit" /></p>
     </form>
 
