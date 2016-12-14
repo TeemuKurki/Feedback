@@ -42,9 +42,9 @@ public class FeedbackController {
 		return "index";
 	}
 	
-	@RequestMapping("/answers/{question_id}")
-	public @ResponseBody List<Answer> allAnswers(@PathVariable int question_id) {
-		List<Answer> answers = answerRepository.findByQuestionId(question_id);
+	@RequestMapping("/answers/{questionId}")
+	public @ResponseBody List<Answer> allAnswers(@PathVariable int questionId) {
+		List<Answer> answers = answerRepository.findByQuestionId(questionId);
 		return answers;
 	}
 	@RequestMapping("/login")
