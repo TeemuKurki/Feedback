@@ -38,10 +38,6 @@ public class Question {
 	@JsonManagedReference
 	private List<Option> options = new ArrayList<Option>();
 	
-	@OneToMany(targetEntity=Option.class, mappedBy="question", cascade={CascadeType.ALL},orphanRemoval=true)
-	@JsonManagedReference
-	private List<Answer> answers = new ArrayList<Answer>();
-	
 	public Question() {
 	}
 	
@@ -90,14 +86,6 @@ public class Question {
 	
 	public void setOptions(List<Option> options) {
 		this.options = options;
-	}
-	
-	public List<Answer> getAnswers() {
-		return answers;
-	}
-	
-	public void setAnswers(List<Answer> answers) {
-		this.answers = answers;
 	}
 
 }
