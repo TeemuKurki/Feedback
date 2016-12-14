@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.MasterBranch.model.Answer;
 import com.MasterBranch.model.Enquiry;
 import com.MasterBranch.model.Question;
@@ -96,22 +94,51 @@ public class FeedbackController {
 		return allEnquiries();
 	}
 	
+	@RequestMapping(value="/addEnquiry", method=RequestMethod.GET)
+	public String getCreateForm(Model model) {
+		Enquiry emptyEnquiry = new Enquiry();
+		model.addAttribute("enquiry", emptyEnquiry);
+		return "addEnquiry";
+	}
+	
 	@RequestMapping(value="/addEnquiry", method=RequestMethod.POST)
-	public String addEnquiry(@RequestBody Enquiry enquiry) {
+	public String addEnquiry(@ModelAttribute(value="enquiry") Enquiry enquiry) {
 		enquiryRepository.save(enquiry);
 		return "redirect:/enquiries";
 	}
 	
+	@RequestMapping(value="/enquiries/{enquiryId}/edit", method=RequestMethod.GET)
+	public String editQueries(@PathVariable Integer enquiryId, Model model) {
+		Question question = new Question();
+		model.addAttribute("Question", question);
+		return "addQuestion";
+	}
+	
+	//Ei kannata laitataa attribuutin nimeksi pelkästään id koska spring boot sattaa tehdä silloin hämmentäviä juttuja
 	@RequestMapping(value="/enquiries/{enquiryId}/edit", method=RequestMethod.POST)
-	public String saveQuery(@PathVariable Integer enquiryId, @RequestBody Question question) {
+	public String saveQuery(@PathVariable Integer enquiryId, @ModelAttribute(value="Question") Question question) {
 		Enquiry e = enquiryRepository.findOne(enquiryId);
 		question.setEnquiry(e);
 		questionRepository.save(question);
 		return "redirect:/enquiries/" + Integer.toString(enquiryId);
 	}
 	
+	@RequestMapping(value="/enquiries/{enquiryId}/{questionId}/answer",method=RequestMethod.POST)
+	   public  @ResponseBody String postAsnwer(@RequestBody Answer answer, HttpServletRequest request) {
+	       System.out.println(answer);
+	       // your logic next
+		return "";
+	   }
+
+	@RequestMapping(value="/enquiries/{enquiryId}/{questionId}/edit", method=RequestMethod.GET)
+	public String addEmptyAnswer(@PathVariable Integer enquiryId, @PathVariable Integer questionId, Model model) {
+		Answer answer = new Answer();
+		model.addAttribute("Answer", answer);
+		return "addAnswer";
+	}
+	
 	@RequestMapping(value="/enquiries/{enquiryId}/{questionId}/edit", method=RequestMethod.POST)
-	public String addAnswer(@PathVariable Integer enquiryId, @PathVariable Integer questionId, @RequestBody Answer answer) {
+	public String addAnswer(@PathVariable Integer enquiryId, @PathVariable Integer questionId, @ModelAttribute(value="Answer") Answer answer) {
 		answer.setQuestionId(questionId);
 		answerRepository.save(answer);
 		return "redirect:/enquiries/"+Integer.toString(enquiryId);
