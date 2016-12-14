@@ -24,7 +24,7 @@ public class Option {
 	private int id;
 	
 	@ManyToOne(targetEntity=Question.class)
-    @JoinColumn(name="query_id")
+    @JoinColumn(name="question_id")
 	@JsonBackReference
 	private Question question;
 	

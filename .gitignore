@@ -1,3 +1,9 @@
+### Webapp ignore ###
+application.properties
+
+### Mac ignore ###
+.DS_Store
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 

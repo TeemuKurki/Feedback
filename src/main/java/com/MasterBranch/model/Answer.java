@@ -1,6 +1,8 @@
 package com.MasterBranch.model;
 
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,10 +19,11 @@ public class Answer {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="answer_id")
 	private int id;
-	private int question_id;
-
-    @NotNull
+	
+	private int questionId;
 	private String answer;
+
+	private int radioButton = 0;
 	
 	public Answer() {
 	}
@@ -45,17 +48,25 @@ public class Answer {
 		this.id = id;
 	}
 
-	public int getQuestion_id() {
-		return question_id;
+	public int getQuestionId() {
+		return questionId;
 	}
 
-	public void setQuestion_id(int question_id) {
-		this.question_id = question_id;
+	public void setQuestionId(int questionId) {
+		this.questionId = questionId;
 	}
 
 	@Override
 	public String toString() {
 		return "Answer [answer=" + answer + ", id=" + id + "]";
+	}
+
+	public int getRadioButton() {
+		return radioButton;
+	}
+
+	public void setRadioButton(int radioButton) {
+		this.radioButton = radioButton;
 	}
 	
 }

@@ -19,17 +19,14 @@ import com.MasterBranch.repository.QuestionRepository;
 
 
 @SpringBootApplication
-public class Application extends SpringBootServletInitializer {
+public class Application {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-	/*
 	@Bean
 	public CommandLineRunner demo(QuestionRepository qrepository, EnquiryRepository erepository, OptionRepository orepository) {
 		return (args) -> {
-			
-	        
 	        
 	        Enquiry e = new Enquiry("Harjoitus kysely", true);
 	        Question q1 = new Question(e, "Monivalinta Kysymys", 1);
@@ -47,5 +44,4 @@ public class Application extends SpringBootServletInitializer {
 		};
 		
 	}
-	*/
 }
