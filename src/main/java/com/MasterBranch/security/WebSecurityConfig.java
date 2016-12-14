@@ -15,7 +15,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	http.csrf().disable();
         http
             .authorizeRequests()
-                .antMatchers("/", "/index").permitAll()
+                .antMatchers("/", "/feedback", "/addAnswer").permitAll() //SULKUJEN SISÄÄN SIVUN NIMI MILLE PITÄÄ PÄÄSTÄ ILMAN LOGINIA //MIIKKA
                 .anyRequest().authenticated()
                 .and()
             .formLogin()

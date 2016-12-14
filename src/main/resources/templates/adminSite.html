@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Spring Security Example</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    </head>
+<body>
+<h1>If you are noob, go away!</h1>
+
+	<form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+    </form>
+    <br></br>
+    
+    <form action="/addQuestion">
+    	<input type="submit" value="Add Question" />
+	</form>
+	
+	<form action="https://media.makeameme.org/created/enquiry-enquiry.jpg">
+    	<input type="submit" value="Add Enquiry" />
+	</form>
+
+</body>
+</html>

@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="charset=UTF-8" />
-<title>Insert title here</title>
-</head>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Add Answer</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    </head>
 <body>
 
 <h1>Form</h1>
     <form th:action="@{edit}" th:object="${Answer}" method="post">
-        <p>Vastaus: <input type="text" th:field="*{answer}" /></p>
+     	<p>Vastaus: <input type="text" field="*{answer}" /></p>    
         <p><input type="submit" value="Submit" /></p>
     </form>
 
